@@ -6,7 +6,7 @@ import {
 } from "recharts";
 import api from '../../components/Api/Axios';
 
-function StudentDashboard() {
+function TeacherDashboard() {
 
   const [user, setUser] = useState(null);
   const [mybook , setMyBook] = useState([])
@@ -91,7 +91,7 @@ const COLORS = [
     <p className="text-sm sm:text-base text-gray-600 leading-relaxed max-w-3xl mt-3">
   Glad to see you back in your dashboard.  
   <span className="text-gray-800 font-medium">
-    Manage your activities, track issued and returned books,
+   {""} Manage your activities, Track issued and Returned books,
   </span>{" "}
   and stay updated with your department details — continue your work smoothly from here..
 </p>
@@ -284,4 +284,4 @@ const COLORS = [
   );
 }
 
-export default StudentDashboard;
+export default TeacherDashboard;

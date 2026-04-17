@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../components/Api/Axios";
 import resetimage from "../../assets/resetimage.jpg";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import { toast } from "react-toastify";
+import  toast  from "react-hot-toast";
+
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -19,7 +19,6 @@ const ForgotPassword = () => {
   });
   const [error , setError] = useState("");
 
-  const backendUrl = import.meta.env.VITE_BACKEND_URI;
 
   const [loading, setLoading] = useState(false);
 
@@ -49,8 +48,8 @@ const ForgotPassword = () => {
 }
 
     try {
-      const res = await axios.post(
-        `${backendUrl}/api/auth/contact-admin`,
+      const res = await api.post(
+        "/api/auth/contact-admin",
         form
       );
 

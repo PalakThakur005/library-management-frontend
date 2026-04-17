@@ -1,4 +1,5 @@
 import React from "react";
+import MiniLoader from "../../components/CommonPages/Minloader";
 
 const ResetPassword = ({ user , onCancel, onConfirm, onCut, loading }) => {
     return (
@@ -31,14 +32,25 @@ const ResetPassword = ({ user , onCancel, onConfirm, onCut, loading }) => {
                         className="px-4 py-2 text-sm bg-gray-200 rounded hover:bg-gray-300">
                         Cancel
                     </button>
-
-                    <button
-                        onClick={onConfirm}
-                        disabled={loading}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
-                    >
-                        {loading ? "Processing..." : "Confirm"}
-                    </button>
+<button
+  onClick={onConfirm}
+  disabled={loading}
+  className={`px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition
+    ${
+      loading
+        ? "bg-blue-400 cursor-not-allowed"
+        : "bg-blue-600 hover:bg-blue-700"
+    } text-white`}
+>
+  {loading ? (
+    <>
+      <MiniLoader size="w-5 h-5" />
+      Processing...
+    </>
+  ) : (
+    "Confirm"
+  )}
+</button>
 
                 </div>
 

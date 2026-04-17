@@ -1,4 +1,5 @@
 import React from "react";
+import MiniLoader from "./Minloader";
 
 const ConfirmationLog = ({handleCancel,handleConfirm,handleCross , loading}) => {
 
@@ -40,13 +41,19 @@ const ConfirmationLog = ({handleCancel,handleConfirm,handleCross , loading}) => 
           </button>
 
           <button onClick={handleConfirm}
-           disabled={loading}
+            disabled={loading}
             
             className="flex-1 py-3 text-[#00304e] font-medium border-l border-gray-200 hover:bg-gray-100 cursor-pointer  hover:shadow-xl disabled:opacity-50
     transition-all duration-300 ease-in-out 
     active:scale-90 active:shadow-md"
           >
-           {loading ? "Processing..." : "Yes"}
+           {loading ? (
+            <>
+            <MiniLoader size= "w-5 h-5" />
+            Processing...
+            </> 
+          ):
+           ("Yes")}
           </button>
 
         </div>

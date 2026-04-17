@@ -1,22 +1,31 @@
-import React, { useState } from "react";
-import { FaUserPlus, FaTrashAlt, FaEdit, FaPowerOff , FaKey} from "react-icons/fa";
-import axios from "axios";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useOutletContext } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import {
+  FaUserPlus,
+  FaArrowRight,
+  FaArrowLeft,
+  FaEdit,
+  FaPowerOff,
+  FaKey,
+  FaUsers,
+  FaUserTie,
+  FaUserGraduate,
+  FaCheckCircle,
+} from "react-icons/fa";
+import MiniLoader from "../../components/CommonPages/Minloader";
+import api from "../../components/Api/Axios"
+import toast from "react-hot-toast";
+import ResetPassword from "./ResetPassword";
+import DashboardCard from "../../components/CommonPages/DashboardCard";
+import CustomToolTip from "../../components/CommonPages/CustomToolTip";
 
-function ManageRoles() {
-
-  const { roles, getUser, handleDelete , handleResetPassword} = useOutletContext();
-
-  const emailPattern =
-    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const ManageRoles = () => {
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const namePattern = /^[A-Za-z\s]{3,}$/;
 
-  const backenduri = import.meta.env.VITE_BACKEND_URI;
 
   const [formData, setFormData] = useState({
     role: "",
+    department: "",
     name: "",
     email: "",
   });
@@ -25,38 +34,138 @@ function ManageRoles() {
   const [roleError, setRoleError] = useState("");
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [departmentError, setDepartmentError] = useState("");
   const [editID, setEditId] = useState(null);
   const [selectedRole, setSelectedRole] = useState("all");
   const [search, setSearch] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState("");
-  const [loading , setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [isEditMode, setEditMode] = useState(false);
+  const [userID, setUserID] = useState("");
+  const [showReset, setShowReset] = useState(false);
+  const [roles, setRoles] = useState([]);
+  const [departments, setDepartments] = useState([]);
+
+
+
+  const [stats, setStats] = useState({
+    total: 0,
+    student: 0,
+    teacher: 0,
+    active: 0,
+  });
+
+
+  useEffect(() => {
+    getStats();
+  }, []);
+
+  const getStats = async () => {
+    try {
+      const res = await api.get("/api/auth/dashboard-stats");;
+      setStats(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  //pagination
+
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const limit = 4;
+
+  const getPaginatedCards = async (pageNumber = 1) => {
+    try {
+      const res = await api.get(
+        `/api/auth/pagination?page=${pageNumber}&limit=${limit}&role=${selectedRole}&search=${search}`
+      );
+
+      setRoles(res.data.data);
+      getStats();
+      setPage(res.data.page);
+      setTotalPages(res.data.totalPages);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Something went wrong");
+    }
+  };
+
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      getPaginatedCards(1);
+    }, 400);
+
+    return () => clearTimeout(delay);
+  }, [search, selectedRole]);
+
+  useEffect(() => {
+    getPaginatedCards(page);
+  }, [page, selectedRole]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [search, selectedRole]);
+
+  // department
+  const getDepartments = async () => {
+    const res = await api.get("/api/dept/get-dep");
+    setDepartments(res.data);
+  };
+
+
+  const activeDepartment = departments.filter(
+    (item) => item.status?.toLowerCase() === "active"
+  );
+
+  useEffect(() => {
+    getDepartments();
+  }, []);
 
   const handleRoles = () => {
     setShowForm(true);
-    setEditId(null);  
-  }
+    setEditMode(false);
+    setEditId(null);
+    setFormData({
+      role: "",
+      department: "",
+      name: "",
+      email: "",
+    });
+  };
   const handleCancel = () => {
+    setEditId(null);
     setShowForm(false);
-  }
+    setFormData({
+      role: "",
+      department: "",
+      name: "",
+      email: "",
+    });
+  };
 
   const handleCross = () => {
+    setEditId(null);
     setShowForm(false);
-  }
+  };
   const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
     setRoleError("");
     setNameError("");
     setEmailError("");
-
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setDepartmentError("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.role) return setRoleError("Please select role");
+    if (!formData.department)
+      return setDepartmentError("Please select department");
     if (!formData.name) return setNameError("Name is required");
     if (!namePattern.test(formData.name))
       return setNameError("Name should have only alphabets");
@@ -65,10 +174,8 @@ function ManageRoles() {
     if (!emailPattern.test(formData.email))
       return setEmailError("Invalid email");
 
-   
-
     const existUser = roles.some(
-      (item) => item.email === formData.email && item._id !== editID
+      (item) => item.email === formData.email && item._id !== editID,
     );
 
     if (existUser) return setEmailError("Email already exists");
@@ -76,96 +183,259 @@ function ManageRoles() {
     try {
       if (editID) {
         setLoading(true);
-        await axios.put(`${backenduri}/api/auth/updateUser/${editID}`, formData);
+        await api.put(`/api/auth/updateUser/${editID}`, formData);
         toast.success("User updated successfully");
       } else {
         setLoading(true);
-        await axios.post(`${backenduri}/api/auth/register`, formData);
+        await api.post("/api/auth/register", formData);
         toast.success("User added successfully");
       }
 
-      setShowForm(false); 
-      getUser();
+
+      getPaginatedCards(page);
+      setShowForm(false);
+      getStats();
       setFormData({
         role: "",
         name: "",
-        email: "" ,       
-           });
+        email: "",
+      });
 
-    } catch {
-      toast.error(error.response?.data?.message ||  "Something went wrong");
-    }finally{
+      setEmailError("");
+      setRoleError("");
+      setNameError("");
+
+      setEditId(null);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Something went wrong");
+    } finally {
       setLoading(false);
     }
   };
 
+  // get users
+
+  //  useEffect(() => {
+  //   getUser();
+  // }, [])
+
+  const getUser = async () => {
+    try {
+      const response = await axios.get(`${backenduri}/api/auth/getRoles`);
+      setRoles(response.data);
+
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to fetch books");
+    }
+  };
+
+  //update user
+
   const handleUpdate = (items) => {
     setShowForm(true);
+    setEditMode(true);
     setEditId(items._id);
     setFormData({
       role: items.role,
       name: items.name,
       email: items.email,
-
+      department: items.department?._id,
     });
   };
 
   const handleSearch = (e) => {
     const { value } = e.target;
     setSearch(value);
-  }
+  };
+
+  //active/inactive
 
   const handleToggleStatus = async () => {
-    setLoading(true)
-  try {
-    await axios.put(
-      `${backenduri}/api/auth/toggle-status/${selectedUserId}`
-    );
+    setLoading(true);
+    try {
+      await api.put(`/api/auth/toggle-status/${selectedUserId}`);
 
-    toast.success("Status updated");
-    getUser(); // refresh data
-    setShowConfirm(false);
+      toast.success("Status updated");
+      getPaginatedCards(page);
+      getStats();
+      setShowConfirm(false);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to update status");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  } catch (error) {
-    toast.error("Failed to update status");
-  }finally{
-    setLoading(false)
-  }
-};
+  //delete user
+
+  // const handleDelete = (id) => {
+  //   setConfirmDelete(true)
+  //   setUserID(id)
+
+  // }
+  // const handleNo = () => {
+  //   setConfirmDelete(false)
+  // }
+
+  // const handleCut = () => {
+  //   setConfirmDelete(false)
+  // }
+
+  // const handleYes = async () => {
+  //   setLoading(true)
+  //   try {
+  //     await axios.delete(
+  //       `${backenduri}/api/auth/deleteUser/${userID}`
+  //     )
+  //     const restUser = roles.filter((items) => items._id !== userID);
+  //     setRoles(restUser)
+  //     toast.success("User deleted successfully")
+  //   } catch (error) {
+  //     toast.error("Failed to delete item")
+  //   }
+  //   finally {
+  //   setLoading(false);
+  // }
+  //       setConfirmDelete(false)
+  // };
+
+  //reset password
+
+  const onCut = () => {
+    setShowReset(false);
+  };
+  const onCancel = () => {
+    setShowReset(false);
+  };
+
+  const handleResetPassword = (id) => {
+    setShowReset(true);
+    setUserID(id);
+  };
+  const onConfirm = async () => {
+    setLoading(true);
+    try {
+      await api.put(`/api/auth/reset-password/${userID}`);
+      toast.success("New password sent to email");
+      setShowReset(false);
+    } catch (error) {
+      toast.error(error.response?.data?.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="bg-white min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* {
+        confirmDelete &&
+        <DeleteConfirmation
+          handleCut={handleCut}
+          handleNo={handleNo}
+          handleYes={handleYes}
+          loading={loading}
+        />
+      } */}
 
+      {showReset && (
+        <ResetPassword
+          user={roles.find((u) => u._id === userID)}
+          onCut={onCut}
+          onCancel={onCancel}
+          onConfirm={onConfirm}
+          loading={loading}
+        />
+      )}
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* HEADER */}
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 py-6">
           <div>
-            <h1 className="text-xl sm:text-2xl font-bold italic">
-              USER <span className="text-blue-600">MANAGEMENT</span>
+            <h1 className="font-[Poppins] text-[25px] font-bold italic">
+              USER{" "}
+              <span className="bg-linear-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+                MANAGEMENT
+              </span>
             </h1>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm font-semibold text-gray-500 pb-10">
               Manage teachers and students efficiently
             </p>
           </div>
 
           <button
             onClick={handleRoles}
-            className="w-auto sm:w-auto self-start flex items-center gap-2 bg-blue-600 text-white px-4 py-2 text-sm rounded-lg hover:bg-blue-700 transition"          >
+            className="w-auto cursor-pointer sm:w-auto self-start flex items-center gap-2 bg-blue-600 text-white px-4 py-2 text-sm rounded-lg hover:bg-blue-700 transition"
+          >
             <FaUserPlus />
             Add Role
           </button>
         </div>
 
+
+        <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(220px,1fr))] mb-6">
+
+          {/* Total Users */}
+          <DashboardCard
+            icon={<FaUserPlus />}
+            title="Total Users"
+            count={stats.total}
+            color="#3b82f6"
+            bgColor="bg-blue-50"
+          />
+
+          {/* Teachers */}
+          <DashboardCard
+            icon={<FaUserTie />}
+            title="Teachers"
+            count={stats.teacher}
+            color="#10b981"
+            bgColor="bg-green-50"
+          />
+
+          {/* Students */}
+          <DashboardCard
+            icon={<FaUserGraduate />}
+            title="Students"
+            count={stats.student}
+            color="#6366f1"
+            bgColor="bg-indigo-50"
+          />
+
+          {/* Active Users */}
+          <DashboardCard
+            icon={<FaCheckCircle />}
+            title="Active Users"
+            count={stats.active}
+            color="#22c55e"
+            bgColor="bg-emerald-50"
+          />
+
+
+
+        </div>
+
+
+        <div className="mt-10 mb-6 flex items-center justify-center gap-4">
+          <div className="h-0.5 w-16 sm:w-32 md:w-48 bg-linear-to-r from-transparent via-blue-400 to-blue-600 rounded-full animate-pulse"></div>
+          <h1 className="font-[Poppins] text-[22px] sm:text-[26px] md:text-[28px] font-bold italic text-center">
+            All{" "}
+            <span className="bg-linear-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+              Users
+            </span>
+          </h1>
+          <div className="h-0.5 w-16 sm:w-32 md:w-48 bg-linear-to-l from-transparent via-blue-400 to-blue-600 rounded-full animate-pulse"></div>
+        </div>
+
         {/* POPUP */}
 
         {showForm && (
-          <div className="fixed inset-0 bg-black/30 flex items-center justify-center p-4">
-
+          <div className="fixed inset-0 z-50 bg-black/30 flex items-center justify-center p-4">
             <div className="bg-white w-full sm:w-[80%] md:w-[60%] lg:w-[45%] xl:w-[35%] p-6 sm:p-8 rounded-lg shadow-xl">
-
               {/* HEADER */}
               <div className="flex justify-between mb-4">
                 <h3 className="font-semibold text-gray-700">
-                  Add Role Details
+                  {isEditMode ? "Edit Role Details" : "Add Role Details"}
                 </h3>
 
                 <p
@@ -176,113 +446,131 @@ function ManageRoles() {
                 </p>
               </div>
 
-
               {/* FORM */}
               <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-4">
-
+                <div className="space-y-4">
                   {/* ROLE */}
-                  <label className="text-sm font-semibold">
-                    Role <span className="text-red-700">*</span>
-                  </label>
 
-                  <div>
+                  <div className="flex items-center gap-4">
+                    <label className="w-32 text-sm text-gray-600">
+                      Role <span className="text-red-700">*</span>
+                    </label>
                     <select
                       value={formData.role}
                       onChange={handleChange}
                       name="role"
-                      className="w-full border rounded-md px-2 py-1.5 text-sm"
+                      className="w-full mt-1 p-2.5 border-2 border-gray-200 rounded-lg bg-blue-50 outline-none focus:border focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                     >
                       <option value="">Select Role</option>
                       <option value="teacher">Teacher</option>
                       <option value="student">Student</option>
                     </select>
-
-                    {roleError && (
-                      <p className="text-red-500 text-xs">{roleError}</p>
-                    )}
                   </div>
+                  {roleError && (
+                    <p className="text-red-500  text-center text-sm">
+                      {roleError}
+                    </p>
+                  )}
+
+                  {/* department */}
+
+                  <div className="flex items-center gap-4">
+                    <label className="w-32 text-sm text-gray-600">
+                      Department<span className="text-red-700">*</span>
+                    </label>
+                    <select
+                      name="department"
+                      value={formData.department}
+                      onChange={handleChange}
+                      className="w-full mt-1 p-2.5 border-2 border-gray-200 rounded-lg bg-blue-50 outline-none focus:border focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                    >
+                      <option value="">Select Department</option>
+                      {activeDepartment.map((item) => (
+                        <option key={item._id} value={item._id}>
+                          {item.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <p className="text-red-500  text-center text-sm">
+                    {departmentError}
+                  </p>
 
                   {/* NAME */}
-                  <label className="text-sm font-semibold">
-                    Name <span className="text-red-700">*</span>
-                  </label>
 
-                  <div>
+                  <div className="flex items-center gap-4">
+                    <label className="w-32 text-sm text-gray-600">
+                      Name <span className="text-red-700">*</span>
+                    </label>
                     <input
                       value={formData.name}
                       onChange={handleChange}
                       type="text"
                       name="name"
-                      className="w-full border rounded-md px-2 py-1.5 text-sm"
+                      className="w-full mt-1 p-2.5 border-2 border-gray-200 rounded-lg bg-blue-50 outline-none focus:border focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                     />
-
-                    {nameError && (
-                      <p className="text-red-800 text-xs">{nameError}</p>
-                    )}
                   </div>
+                  {nameError && (
+                    <p className="text-red-800 text-center text-sm">
+                      {nameError}
+                    </p>
+                  )}
 
                   {/* EMAIL */}
-                  <label className="text-sm font-semibold">
-                    Email <span className="text-red-700">*</span>
-                  </label>
 
-                  <div>
+                  <div className="flex items-center gap-4">
+                    <label className="w-32 text-sm text-gray-600">
+                      Email <span className="text-red-700">*</span>
+                    </label>
                     <input
                       value={formData.email}
+                      disabled={isEditMode}
                       onChange={handleChange}
                       type="email"
                       name="email"
                       title="Please enter a valid email address"
-                      className="w-full border rounded-md px-2 py-1.5 text-sm"
+                      className={`w-full mt-1 p-2.5 border-2 border-gray-200 rounded-lg bg-blue-50 outline-none focus:border focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100
+                    ${isEditMode ? "text-gray-500 cursor-not-allowed" : ""}`}
                     />
-
-                    {emailError && (
-                      <p className="text-red-800 text-xs">{emailError}</p>
-                    )}
                   </div>
-
-                  {/* PASSWORD */}
-                  {/* <label className="text-sm font-semibold">
-                    Password <span className="text-red-700">*</span>
-                  </label>
-
-                  <div>
-                    <input
-                      value={formData.password}
-                      onChange={handleChange}
-                      type="password"
-                      name="password"
-                      className="w-full border rounded-md px-2 py-1.5 text-sm"
-                    />
-
-                    {passwordError && (
-                      <p className="text-red-600 text-xs">{passwordError}</p>
-                    )}
-                  </div> */}
-
+                  {emailError && (
+                    <p className="text-red-800 text-center text-sm">
+                      {emailError}
+                    </p>
+                  )}
                 </div>
 
                 {/* BUTTONS */}
-                <div className="flex justify-between mt-6">
-
+                <div className="flex justify-end gap-3 pt-2 mt-5">
                   <button
                     onClick={handleCancel}
                     type="button"
-                    className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 hover:scale-105 transition duration-300 active:scale-95 shadow-md"
+                    className="px-4 py-2 cursor-pointer rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm transition"
                   >
                     Cancel
                   </button>
 
                   <button
-                  disabled={loading}
-                    className="bg-[#00536e] text-white px-5 py-2 rounded-md hover:bg-[#00455c] hover:scale-105 transition duration-300 active:scale-95 shadow-md"
+                    disabled={loading}
+                    type="submit"
+                    className={`flex items-center justify-center  cursor-pointer gap-2 px-4 py-2 rounded-lg text-white text-sm transition shadow
+                    ${loading
+                        ? "cursor-not-allowed bg-blue-400 opacity-80"
+                        : "bg-blue-600 hover:bg-blue-700"
+                      }`}
                   >
-                   {loading ? "Processing..." : "Submit →" }
+                    {loading ? (
+                      <>
+                        <MiniLoader size="w-5 h-5" />
+                        {isEditMode ? "Updating..." : "Adding..."}
+                      </>
+                    ) : isEditMode ? (
+                      "Update User"
+                    ) : (
+                      " Add user"
+                    )}
                   </button>
-
                 </div>
-
               </form>
             </div>
           </div>
@@ -292,9 +580,7 @@ function ManageRoles() {
 
         {showConfirm && (
           <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-
             <div className="bg-white w-[90%] sm:w-100 p-6 rounded-xl shadow-lg relative">
-
               <span
                 onClick={() => setShowConfirm(false)}
                 className="absolute top-3 right-4 text-xl cursor-pointer text-gray-500 hover:text-black"
@@ -302,54 +588,62 @@ function ManageRoles() {
                 &times;
               </span>
 
-              <h2 className="text-lg font-semibold mb-3">
-                Confirm Action
-              </h2>
+              <h2 className="text-lg font-semibold mb-3">Confirm Action</h2>
 
               <p className="text-sm text-gray-600 mb-5">
-                Are you sure you want to <span className="font-semibold">{selectedStatus === "active" ? "Deactivate" : "Activate"}</span> this user?
+                Are you sure you want to{" "}
+                <span className="font-semibold">
+                  {selectedStatus === "active" ? "Deactivate" : "Activate"}
+                </span>{" "}
+                this user?
               </p>
 
               <div className="flex justify-end gap-3">
-
-                <button onClick={() => setShowConfirm(false)}
-                  className="px-4 py-2 text-sm bg-gray-200 rounded hover:bg-gray-300">
+                <button
+                  onClick={() => setShowConfirm(false)}
+                  className="px-4 cursor-pointer py-2 text-sm bg-gray-200 rounded hover:bg-gray-300"
+                >
                   Cancel
                 </button>
 
                 <button
                   onClick={handleToggleStatus}
                   disabled={loading}
-                  className="px-4 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700">
-                  {loading ? "Processing..." : "Yes"}
+                  className="px-4 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
+                >
+                  {loading ? (
+                    <>
+                      <MiniLoader size="w-5 h-5" />
+                      Processing
+                    </>
+                  ) : (
+                    "Yes"
+                  )}
                 </button>
-
               </div>
-
             </div>
           </div>
         )}
 
 
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
 
+
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between  gap-4 mb-4">
           <div className="flex flex-wrap gap-2">
-
             {/* ALL */}
             <button
               onClick={() => setSelectedRole("all")}
-              className={`px-4 py-2 rounded transition ${selectedRole === "all"
+              className={`px-4 py-2 cursor-pointer rounded transition ${selectedRole === "all"
                 ? "bg-blue-600 text-white"
                 : "bg-gray-200 text-black hover:bg-gray-300"
                 }`}
             >
               All
             </button>
-
             {/* TEACHER */}
             <button
               onClick={() => setSelectedRole("teacher")}
-              className={`px-4 py-2 rounded transition ${selectedRole === "teacher"
+              className={`px-4 py-2 cursor-pointer rounded transition ${selectedRole === "teacher"
                 ? "bg-blue-600 text-white"
                 : "bg-gray-200 text-black hover:bg-gray-300"
                 }`}
@@ -360,14 +654,13 @@ function ManageRoles() {
             {/* STUDENT */}
             <button
               onClick={() => setSelectedRole("student")}
-              className={`px-4 py-2 rounded transition ${selectedRole === "student"
+              className={`px-4 py-2 cursor-pointer rounded transition ${selectedRole === "student"
                 ? "bg-blue-600 text-white"
                 : "bg-gray-200 text-black hover:bg-gray-300"
                 }`}
             >
               Student
             </button>
-
           </div>
 
           <input
@@ -375,58 +668,107 @@ function ManageRoles() {
             value={search}
             onChange={handleSearch}
             placeholder="🔍 Search by name or email..."
-            className="w-auto sm:w-56 md:w-64 px-3 py-2 text-sm outline-none border border-gray-400 rounded-lg focus:ring-1 focus:ring-blue-100 focus:border-blue-500 self-start" />
-
+            className="w-auto sm:w-56 md:w-64 px-3 py-2 text-sm outline-none border border-gray-400 rounded-lg focus:ring-1 focus:ring-blue-100 focus:border-blue-500 self-start"
+          />
         </div>
 
         {/* TABLE */}
         <div className="mt-6">
           <h3 className="text-lg font-semibold mb-4">Added Roles</h3>
 
-          {/* SCROLL CONTAINER */}
-          <div className="w-full overflow-x-auto">
 
-            <div className="bg-white rounded-xl shadow-md border border-gray-200 min-w-175">
+          <div className="w-full overflow-x-auto rounded-xl shadow-md border border-gray-200 bg-white">
+            <table className="min-w-175 w-full text-sm border-collapse">
+              <thead className="bg-blue-600 text-white sticky top-0 z-10">
+                <tr>
+                  <th className="p-3 text-left font-semibold">S.No</th>
+                  <th className="p-3 text-left font-semibold">Name</th>
+                  <th className="p-3 text-left font-semibold">Email</th>
+                  <th className="p-3 text-left font-semibold">Department</th>
+                  <th className="p-3 text-left font-semibold">Role</th>
+                  <th className="p-3 text-left font-semibold">Status</th>
+                  <th className="p-3 text-left font-semibold">Action</th>
+                </tr>
+              </thead>
 
-              <table className="w-full text-sm">
-
-                {/* HEADER */}
-                <thead className="bg-blue-500 text-white">
+              {/* BODY */}
+              <tbody className="divide-y divide-gray-200">
+                {roles.filter((items) => items.role !== "admin").length === 0 ? (
                   <tr>
-                    <th className="p-3 text-left font-semibold">Role</th>
-                    <th className="p-3 text-left font-semibold">Name</th>
-                    <th className="p-3 text-left font-semibold">Email</th>
-                    <th className="p-3 text-left font-semibold">Status</th>
-                    <th className="p-3 text-left font-semibold">Action</th>
-                  </tr>
-                </thead>
+                    <td colSpan="6" className="p-8">
+                      <div className="flex flex-col items-center text-center text-gray-500 
+                  bg-white shadow-md rounded-xl py-3 px-6">
 
-                {/* BODY */}
-                <tbody>
-                  {roles
+                        <div className="bg-gray-200 p-4 rounded-full mb-3">
+                          <FaUsers className="text-3xl text-gray-400" />
+                        </div>
+
+                        <p className="text-xl font-semibold text-gray-700">
+                          No users available yet
+                        </p>
+
+                        <p className="text-sm text-gray-400 mt-2">
+                          Add users to manage roles, access, and activities.
+                        </p>
+
+                        <p className="text-sm text-gray-400 mt-1">
+                          Data will appear once it is added.
+                        </p>
+
+                        <button
+                          onClick={() => setShowForm(true)}
+                          className="mt-5 flex items-center gap-2 bg-blue-500 text-white 
+             px-5 py-2.5 rounded-lg font-medium shadow-md 
+             hover:bg-blue-700 hover:shadow-lg transition-all duration-300"
+                        >
+                          Add User
+                        </button>
+
+                      </div>
+                    </td>
+                  </tr>
+                ) : (
+                  roles
                     .filter((items) => items.role !== "admin")
-                    .filter(item => selectedRole === "all" || item.role === selectedRole)
-                    .filter((items) =>
-                      items.name.toLowerCase().includes(search.toLowerCase()) ||
-                      items.email.toLowerCase().includes(search.toLowerCase())
-                    )
                     .map((items, index) => (
                       <tr
                         key={index}
-                        className="border-b last:border-none hover:bg-blue-50 transition duration-200"
+                        className="hover:bg-blue-50 transition duration-200"
                       >
-                        <td className="p-3 capitalize font-medium text-gray-900 whitespace-nowrap">
-                          {items.role}
+
+
+                        <td className="p-3 text-gray-700 font-medium">
+                          {(page - 1) * limit + index + 1}
                         </td>
 
-                        <td className="p-3 text-gray-800 font-medium whitespace-nowrap">
+
+                        <td className="p-3 capitalize text-gray-800 font-medium whitespace-nowrap">
                           {items.name}
                         </td>
-
 
                         <td className="p-3 text-gray-900 wrap-break-words max-w-50">
                           {items.email}
                         </td>
+
+                        <td className="p-3 capitalize font-medium text-gray-900 whitespace-nowrap">
+                          {items.department?.name}
+                        </td>
+
+
+                        <td className="p-3  whitespace-nowrap">
+                          <span
+                            className={`px-3 py-1 text-xs  font-medium rounded-full capitalize
+                               ${items.role === "student" ? "bg-blue-100 text-blue-600" : ""}
+                                ${items.role === "teacher" ? "bg-green-100 text-green-600" : ""}
+                                `}
+                          >
+                            {items.role}
+                          </span>
+                        </td>
+
+
+
+
 
                         <td className="p-3">
                           <div className="flex items-center gap-2">
@@ -436,6 +778,7 @@ function ManageRoles() {
                                 : "bg-red-500"
                                 }`}
                             ></span>
+
                             <span
                               className={`text-xs font-medium ${items.status === "active"
                                 ? "text-green-600"
@@ -444,56 +787,95 @@ function ManageRoles() {
                             >
                               {items.status === "active" ? "Active" : "Inactive"}
                             </span>
-
                           </div>
                         </td>
 
                         <td className="p-3">
-                          <div className="flex justify-start gap-4 text-lg whitespace-nowrap ">
+                          <div className="flex justify-start gap-4 text-lg whitespace-nowrap">
+                            <CustomToolTip text="Edit User">
+                              <FaEdit
+                                onClick={() => {
+                                  if (items.status === "inactive") return;
+                                  handleUpdate(items);
+                                }}
+                                className={`transition ${items.status === "inactive"
+                                  ? "text-gray-300 cursor-not-allowed"
+                                  : "text-gray-500 cursor-pointer hover:scale-110 hover:text-gray-600"
+                                  }`}
+                              />
+                            </CustomToolTip>
 
-                            <FaEdit
-                              onClick={() => handleUpdate(items)}
-                              className="text-gray-500 cursor-pointer hover:scale-110 hover:text-gray-600 transition"
-                            />
+                            <CustomToolTip text="Reset Password">
+                              <FaKey
+                                onClick={() => handleResetPassword(items._id)}
+                                className="text-gray-400 cursor-pointer hover:scale-110 hover:text-gray-600 transition"
+                              />
+                            </CustomToolTip>
 
-                            <FaTrashAlt
-                              onClick={() => handleDelete(items._id)}
-                              className="text-red-500 cursor-pointer hover:scale-110 hover:text-red-600 transition"
-                            />
-
-                             <FaKey
-                              onClick={() => handleResetPassword(items._id)}
-                              className="text-gray-400 cursor-pointer hover:scale-110 hover:text-gray-600 transition"
-                            />
-
-                            <FaPowerOff
-                              onClick={() => {
-                                setSelectedUserId(items._id);
-                                setSelectedStatus(items.status);
-                                setShowConfirm(true);
-                              }}
-                              className={`text-sm transition ${items.status === "active"
-                                ? "text-green-500 hover:text-green-600 hover:scale-110  "
-                                : "text-red-500 hover:text-red-600 hover:scale-110"
-                                }`}
-                            />
-
-                           
-
-
+                            <CustomToolTip text="Status">
+                              <FaPowerOff
+                                onClick={() => {
+                                  setSelectedUserId(items._id);
+                                  setSelectedStatus(items.status);
+                                  setShowConfirm(true);
+                                }}
+                                className={`text-sm cursor-pointer transition ${items.status === "active"
+                                  ? "text-green-500 hover:text-green-600 hover:scale-110"
+                                  : "text-red-500 hover:text-red-600 hover:scale-110"
+                                  }`}
+                              />
+                            </CustomToolTip>
                           </div>
                         </td>
                       </tr>
-                    ))}
-                </tbody>
-
-              </table>
-            </div>
+                    ))
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
+
+        {/* PAGINATION */}
+        {totalPages > 1 && (
+          <div className="flex justify-end items-center gap-3 mt-6 pb-6">
+
+            {/* Prev Button */}
+            <button
+              disabled={page === 1}
+              onClick={() => setPage(page - 1)}
+              className="flex items-center gap-1 px-4 py-1.5 rounded-md border border-gray-300 text-gray-600
+      bg-white hover:bg-gray-100 hover:text-[#00455c]
+      active:scale-95 transition-all duration-200
+      disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white"
+            >
+              <FaArrowLeft className="text-sm" />
+              <span className="text-sm font-medium">Prev</span>
+            </button>
+
+            {/* Page Info */}
+            <span className="text-sm font-semibold text-gray-700 px-2">
+              {page} <span className="text-gray-400">of</span> {totalPages}
+            </span>
+
+            {/* Next Button */}
+            <button
+              disabled={page === totalPages}
+              onClick={() => setPage(page + 1)}
+              className="flex items-center gap-1 px-4 py-1.5 rounded-md border border-gray-300 text-gray-600
+      bg-white hover:bg-gray-100 hover:text-[#00455c]
+      active:scale-95 transition-all duration-200
+      disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white"
+            >
+              <span className="text-sm font-medium">Next</span>
+              <FaArrowRight className="text-sm" />
+            </button>
+
+          </div>
+        )}
+
       </div>
     </div>
   );
-}
+};
 
 export default ManageRoles;
