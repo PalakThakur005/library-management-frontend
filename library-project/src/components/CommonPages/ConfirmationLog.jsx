@@ -3,8 +3,9 @@ import MiniLoader from "./Minloader";
 
 const ConfirmationLog = ({handleCancel,handleConfirm,handleCross , loading}) => {
 
+
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/35 backdrop-blur-sm z-1000">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/35 backdrop-blur-sm z-1100">
 
       <div className="w-85 bg-white rounded-xl pt-5 pb-0 px-5 relative text-center shadow-[0_10px_25px_rgba(0,0,0,0.2)] animate-[popupJump_.4s_ease]">
 
@@ -47,13 +48,15 @@ const ConfirmationLog = ({handleCancel,handleConfirm,handleCross , loading}) => 
     transition-all duration-300 ease-in-out 
     active:scale-90 active:shadow-md"
           >
-           {loading ? (
+           {/* {loading ? (
             <>
             <MiniLoader size= "w-5 h-5" />
             Processing...
             </> 
-          ):
-           ("Yes")}
+          ): */}
+           {/* ( */}
+            Yes
+           {/* )} */}
           </button>
 
         </div>

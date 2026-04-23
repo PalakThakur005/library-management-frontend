@@ -3,8 +3,11 @@ import api from "../../components/Api/Axios";
 import toast from "react-hot-toast";
 import DashboardCard from "../../components/CommonPages/DashboardCard";
 import { FaArrowLeft,FaBook,FaEdit,FaUndo, FaArrowRight , FaBookReader } from "react-icons/fa";
+import useTitle from "../../components/hooks/useTitle";
 
 function Issuedbooks() {
+
+  useTitle("Issued Library Books")
 
 
   // ✅ STATS
@@ -18,12 +21,10 @@ function Issuedbooks() {
 
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [loading , setLoading] = useState(false)
   const [myBooks, setMyBooks] = useState([]);
   const limit = 4;
 
   const getPaginatedbooks = async (pageNumber = 1) => {
-    setLoading(true)
     try {
       const res = await api.get(
         `/api/mybooks/getmyissuedbooks?page=${pageNumber}&limit=${limit}` 
@@ -36,8 +37,6 @@ setPage(res.data.pagination?.page);
 setTotalPages(res.data.pagination?.totalPages)
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
-    }finally{
-      setLoading(false)
     }
   };
 
@@ -45,22 +44,16 @@ setTotalPages(res.data.pagination?.totalPages)
     getPaginatedbooks(page);
   }, [page]);
 
- if (loading) {
-    return (
-      <div className="h-screen flex items-center justify-center text-gray-500">
-        Loading Library Books...
-      </div>
-    );
-  }
+
 
 
 
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto ">
 
       {/* HEADER */}
-<div className="flex flex-col  mt-10 sm:flex-row sm:justify-between sm:items-center gap-4 py-6 px-5 bg-white rounded-2xl shadow-[0_0_30px_rgba(0,0,0,0.20)] hover:shadow-[0_0_2px_rgba(0,0,0,0.18)] transition-all duration-300 border border-gray-100">
+<div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 py-6 px-5 bg-white rounded-2xl shadow-[0_0_30px_rgba(0,0,0,0.20)] hover:shadow-[0_0_2px_rgba(0,0,0,0.18)] transition-all duration-300 border border-gray-100">
   <div>
     <h1 className="font-[Poppins] text-[25px] font-bold italic">
       MY{" "}
@@ -77,7 +70,7 @@ setTotalPages(res.data.pagination?.totalPages)
 </div>
 
       {/* STATS  */}
-       <div className="grid gap-5 my-15 grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
+<div className="grid gap-4 my-10 grid-cols-1 md:grid-cols-2  sm:grid-cols-2 lg:grid-cols-4">
         <DashboardCard
           icon={<FaBook />}
           title="Total Issued"
@@ -175,13 +168,13 @@ setTotalPages(res.data.pagination?.totalPages)
                 {item.book?.isbn || "N/A"}
               </td>
 
-                <td className="p-3 font-medium text-gray-900 whitespace-nowrap">
+                <td className="p-3 font-medium text-gray-900 capitalize whitespace-nowrap">
                  {item.book?.author || "Unknown author"}
               </td>
 
              
               {/* BOOK */}
-              <td className="p-3 font-medium text-gray-900 whitespace-nowrap">
+              <td className="p-3 font-medium text-gray-900 capitalize whitespace-nowrap">
                  {item.book?.title || "Unknown Book"}
               </td>
 

@@ -2,10 +2,11 @@ import React from "react";
 import MiniLoader from "../../components/CommonPages/Minloader";
 
 const ResetPassword = ({ user , onCancel, onConfirm, onCut, loading }) => {
+   
     return (
 
 
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+        <div className="fixed inset-0 backdrop-blur bg-black/40 flex items-center justify-center z-1100">
 
             <div className="bg-white w-[90%] sm:w-100 p-6 rounded-xl shadow-lg relative">
 

@@ -19,6 +19,8 @@ export const sidebarConfig = {
     { label: "Books", icon: FaBookOpen, path: "/admin/Books" },
     {label : "Card Issue", icon :FaIdBadge , path : "/admin/cardIssue"},
      {label : " Issue Book", icon :FaBook , path : "/admin/issuebook"},
+    {label : " Admin Profile", icon :FaUser , path : "/admin/profile"},
+
 
   ],
 

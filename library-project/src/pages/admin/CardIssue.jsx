@@ -5,8 +5,11 @@ import api from "../../components/Api/Axios";
 import  toast  from "react-hot-toast";
 import DashboardCard from "../../components/CommonPages/DashboardCard";
 import CustomToolTip from "../../components/CommonPages/CustomToolTip";
+import useTitle from "../../components/hooks/useTitle";
 
 const CardIssue = () => {
+
+  useTitle("Issue Library Card")
 
 
   const [showForm, setShowForm] = useState(false);
@@ -194,26 +197,25 @@ const CardIssue = () => {
   };
 
   return (
-    <div className="bg-white min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* HEADER */}
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 py-6">
+    <div className=" min-h-screen">
+          <div className="max-w-7xl mx-auto ">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center lg:gap-4   ">
           <div>
-            <h1 className="font-[Poppins] text-[25px] font-bold italic">
+            <h1 className="font-[Poppins] lg:text-[25px] md:text-[20px]  text-[20px] font-bold italic">
               ISSUE{" "}
               <span className="bg-linear-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
                 {" "}
                 LIBRARY CARD
               </span>
             </h1>
-            <p className="text-sm font-semibold text-gray-500 pb-10">
+            <p className="lg:text-sm  text-xs font-semibold  text-gray-500 pb-5 lg:pb-10">
               {" "}
               Issue and manage library cards for students and teachers.{" "}
             </p>
           </div>
           <button
             onClick={() => setShowForm(true)}
-            className="w-auto cursor-pointer sm:w-auto self-start flex items-center gap-2 bg-blue-600 text-white px-4 py-2 text-sm rounded-lg hover:bg-blue-700 transition"
+            className="w-auto text-[10px] sm:text-[13px]   lg:text-[15px] cursor-pointer mb-5  sm:w-auto self-start flex items-center gap-2 bg-blue-600 text-white lg:px-4 py-2 px-2 text-sm rounded-lg hover:bg-blue-700 transition"
           >
             <FaIdCard />
             Issue Card
@@ -251,23 +253,13 @@ const CardIssue = () => {
 
 </div>
 
-      <div className="mt-10 mb-6 flex items-center justify-center gap-4">
-  <div className="h-0.5 w-16 sm:w-32 md:w-48 bg-linear-to-r from-transparent via-blue-400 to-blue-600 rounded-full animate-pulse"></div>
-  <h1 className="font-[Poppins] text-[22px] sm:text-[26px] md:text-[28px] font-bold italic text-center">
-    ISSUED{" "}
-    <span className="bg-linear-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
-      CARDS
-    </span>
-  </h1>
-  <div className="h-0.5 w-16 sm:w-32 md:w-48 bg-linear-to-l from-transparent via-blue-400 to-blue-600 rounded-full animate-pulse"></div>
-</div>
   
 
 
         {/* form */}
 
         {showForm && (
-          <div className="fixed inset-0 bg-black/50   flex justify-center items-center z-50">
+          <div className="fixed inset-0 bg-black/40 backdrop-blur-sm   flex justify-center items-center z-1100">
             <div className="bg-white w-[95%] sm:w-105 rounded-2xl shadow-xl p-6 animate-fadeIn">
               {/* HEADER */}
               <div className="flex justify-between items-center mb-5 border-b pb-3">
@@ -461,7 +453,7 @@ const CardIssue = () => {
 
         {/* card  */}
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
 {cards?.length === 0 ? (
   <div className="col-span-full flex justify-center p-6">
     
@@ -511,7 +503,7 @@ const CardIssue = () => {
       >
         <div className="h-1.5 bg-linear-to-r bg-[#2d6c93]"></div>
 
-        <div className="flex items-center gap-3 p-4">
+        <div className="flex items-center  gap-2 p-4">
           <div
             className="w-12 h-12 rounded-full bg-linear-to-br bg-[#2d6c93] 
             text-white flex items-center justify-center font-semibold text-lg shadow-md 
@@ -519,8 +511,8 @@ const CardIssue = () => {
           >
             {card.user?.name?.charAt(0).toUpperCase()}
           </div>
-
-          <div className="flex-1">
+             
+          <div className="flex-1 ">
             <h3 className="text-base capitalize font-semibold text-[#2d6c93] group-hover:text-[#245a7b] transition">
               {card.user?.name}
             </h3>

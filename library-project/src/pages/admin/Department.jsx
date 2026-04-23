@@ -5,8 +5,11 @@ import api from "../../components/Api/Axios";
 import toast from "react-hot-toast";
 import DashboardCard from "../../components/CommonPages/DashboardCard";
 import CustomToolTip from "../../components/CommonPages/CustomToolTip";
+import useTitle from "../../components/hooks/useTitle";
 
 const Department = () => {
+
+  useTitle("Assign Department ")
 
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -113,7 +116,7 @@ const Department = () => {
       newErrors.description = "Description is required";
     } else if (formData.description.length < 5) {
       newErrors.description = "Minimum 5 characters";
-    } else if (formData.description.length > 70) {
+    } else if (formData.description.length > 150) {
       newErrors.description = "Description too long";
     }
 
@@ -207,18 +210,18 @@ const Department = () => {
 
 
   return (
-    <div className="bg-white min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className=" min-h-screen">
+    <div className="max-w-7xl mx-auto">
         {/* HEADER */}
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 py-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4  ">
           <div>
-            <h1 className="font-[Poppins] text-[25px] font-bold italic">
+            <h1 className="font-[Poppins] lg:text-[25px]   text-[18px] font-bold italic">
               DEPARTMENT{" "}
-              <span className="bg-linear-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-blue-600  lg:text-[25px]   text-[18px] to-blue-400 bg-clip-text text-transparent">
                 MANAGEMENT
               </span>
             </h1>
-            <p className="text-sm font-semibold text-gray-500 pb-10">
+            <p className="lg:text-sm  text-xs font-semibold  text-gray-500 pb-3 lg:pb-10">
               Add and manage library departments
             </p>
           </div>
@@ -227,7 +230,7 @@ const Department = () => {
             onClick={() => {
               setShowForm(true);
             }}
-            className="w-auto cursor-pointer sm:w-auto self-start flex items-center gap-2 bg-blue-600 text-white px-4 py-2 text-sm rounded-lg hover:bg-blue-700 transition"
+            className="w-auto cursor-pointer mb-5 text-[10px] sm:text-[13px] lg:text-[15px] sm:w-auto self-start flex items-center gap-2 bg-blue-600 text-white lg:px-4 py-2 px-2 text-sm rounded-lg hover:bg-blue-700 transition"
           >
             <FaBuilding />
             Add Department
@@ -236,7 +239,7 @@ const Department = () => {
 
 
 
-        <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
+<div className="grid gap-4 grid-cols-1  sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
 
           <DashboardCard
             icon={<FaBuilding />}
@@ -279,12 +282,10 @@ const Department = () => {
                   </div>
                 </div>
 
-                {/* Title */}
                 <h2 className="text-xl font-semibold text-gray-700">
                   No Departments Found
                 </h2>
 
-                {/* Description */}
                 <p className="text-sm text-gray-400 mt-2">
                   You haven’t added any departments yet.
                 </p>
@@ -314,7 +315,7 @@ const Department = () => {
               >
                 <div className="absolute inset-0 bg-linear-to-br from-[#00304e]/5 via-transparent to-gray-100 opacity-0 group-hover:opacity-100 transition duration-500"></div>
 
-                <div className="absolute left-0 top-0 h-full w-0.75 bg-gray-300 group-hover:w-1.5 transition-all duration-300"></div>
+                <div className="absolute left-0 top-0 h-full w-0.75 bg-[#2d6c93] group-hover:w-1.5 transition-all duration-300"></div>
 
                 <div className="p-5 relative z-10">
                   <div className="flex justify-between items-start">
@@ -425,8 +426,8 @@ const Department = () => {
 
 
         {showForm && (
-          <div className="fixed inset-0 bg-black/50   flex justify-center items-center z-50">
-            <div className="bg-white w-[95%] sm:w-105 rounded-2xl shadow-xl p-6 animate-fadeIn">
+          <div className="fixed inset-0 bg-black/40 backdrop-blur-sm   flex justify-center items-center z-1100  mt-16 md:mt-0 sm:mt-0 lg:mt-0">
+            <div className="bg-white w-[95%] sm:w-[70%] lg:w-105 md:w-120 rounded-2xl shadow-xl p-6 animate-fadeIn">
               {/* HEADER */}
               <div className="flex justify-between items-center mb-5 border-b pb-3">
                 <h2 className="text-xl font-semibold text-gray-800">

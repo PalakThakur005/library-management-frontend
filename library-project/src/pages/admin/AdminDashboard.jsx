@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../../components/Api/Axios";
 import DashboardCard from "../../components/CommonPages/DashboardCard";
 import DashboardCharts from "./DashboardCharts";
+import useTitle from "../../components/hooks/useTitle";
 
 import {
   FaUsers,
@@ -13,6 +14,8 @@ import {
 
 
 const AdminDashboard = ({ users }) => {
+
+  useTitle("Admin Dashboard")
 
 
   const [stats, setStats] = useState({
@@ -39,24 +42,27 @@ const AdminDashboard = ({ users }) => {
 
 
   return (
-    <div className="p-8 bg-white min-h-screen">
+    <div className="  min-h-screen">
+          <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center lg:gap-4   ">
+            <div>
 
-      <div className="flex flex-col">
-        <h1 className="font-[Poppins] text-[25px] font-bold italic">
+            <h1 className="font-[Poppins] lg:text-[25px] md:text-[20px]  text-[20px] font-bold italic">
           <span className="text-black">SUPER </span>
           <span className="bg-linear-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
             ADMIN
           </span>
-          <span className="text-[#4a6a8a] font-semibold text-[22px]">
+          <span className="text-[#4a6a8a] font-semibold  lg:text-[25px] text-[20px]">
             {" "}DASHBOARD
           </span>
         </h1>
 
-        <p className="text-sm font-semibold text-gray-500 pb-10">
+            <p className="lg:text-sm  text-xs font-semibold  text-gray-500 pb-5 lg:pb-10">
           Welcome back, Palak Thakur. Here's what's happening in your platform.
         </p>
       </div>
-<div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
+      </div>
+<div className="grid gap-4 grid-cols-1 md:grid-cols-2  sm:grid-cols-2 lg:grid-cols-4">
 
   {/* TOTAL USERS */}
   <DashboardCard
@@ -99,6 +105,7 @@ const AdminDashboard = ({ users }) => {
 
       <DashboardCharts users={users} />
 
+    </div>
     </div>
   );
 };

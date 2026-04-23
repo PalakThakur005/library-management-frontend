@@ -66,8 +66,7 @@ const DashboardCharts = () => {
     <div className="w-full px-3 sm:px-6 mt-6 sm:mt-10">
 
       {/* GRID */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-
+       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         {/* 📊 BAR CHART */}
         <div className="rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition bg-white p-4 sm:p-6">
 
@@ -78,7 +77,6 @@ const DashboardCharts = () => {
             Users, Departments, Books & Cards
           </p>
 
-          {/* ✅ ONLY HEIGHT FIX */}
 
           
           <div className="w-full h-65 sm:h-72 md:h-72">

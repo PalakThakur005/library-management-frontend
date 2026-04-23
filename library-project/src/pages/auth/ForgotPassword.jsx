@@ -3,9 +3,13 @@ import { useNavigate } from "react-router-dom";
 import api from "../../components/Api/Axios";
 import resetimage from "../../assets/resetimage.jpg";
 import  toast  from "react-hot-toast";
+import useTitle from "../../components/hooks/useTitle";
 
 
 const ForgotPassword = () => {
+
+   useTitle("Contact Admin")
+
   const navigate = useNavigate();
 
   const emailRef = useRef();

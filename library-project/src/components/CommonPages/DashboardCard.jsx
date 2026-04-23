@@ -2,7 +2,7 @@ import React from "react";
 
 function DashboardCard({ title, count, icon }) {
   return (
-    <div className="relative overflow-hidden min-w-60 flex items-center gap-4 p-5 rounded-xl 
+    <div className="relative overflow-hidden  flex  items-center gap-4 p-5 rounded-xl 
     bg-white
     border border-[#01253c]/10
     shadow-sm
@@ -14,17 +14,17 @@ function DashboardCard({ title, count, icon }) {
 
      
       <div className="absolute bottom-3 right-3 opacity-20">
-        <div className="w-16 h-0.5 bg-[#2796db] mb-1"></div>
-        <div className="w-12 h-0.5 bg-[#199ced] mb-1"></div>
-        <div className="w-8 h-0.5 bg-[#00304e] mb-1"></div>
-        <div className="w-5 h-0.5 bg-[#00304e]"></div>
+        <div className="w-16 h-[2px] bg-[#2d6c93] mb-1"></div>
+        <div className="w-12 h-[2px] bg-[#2d6c93] mb-1"></div>
+        <div className="w-8 h-[2px] bg-[#00304e] mb-1"></div>
+        <div className="w-5 h-[2px] bg-[#00304e]"></div>
       </div>
 
      
       <div className="flex items-center justify-center 
       w-10 h-10 rounded-lg 
       bg-[#01253c]/10">
-        <div className="text-[#1c7ab4] text-lg">
+        <div className="text-[#2d6c93] text-lg">
           {icon}
         </div>
       </div>

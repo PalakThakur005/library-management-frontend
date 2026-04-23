@@ -12,6 +12,9 @@ if(!token){
 if(role&&role!==role){
   return <Navigate to ='/login'replace/>
 }
+
 return <Outlet/>;
 }
-export default ProtectedRoutes
+export default ProtectedRoutes       
+
+

@@ -7,7 +7,11 @@ import logo from "../../assets/logo.png";
 import  toast  from "react-hot-toast";
 import MiniLoader from "../../components/CommonPages/Minloader";
 import api from "../../components/Api/Axios";
+import useTitle from "../../components/hooks/useTitle";
 function Login() {
+  
+   useTitle("Login")
+
   const navigate = useNavigate();
   const emailRef = useRef();
   const passwordRef = useRef();

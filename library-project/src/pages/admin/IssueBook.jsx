@@ -5,8 +5,13 @@ import toast from "react-hot-toast";
 import MiniLoader from "../../components/CommonPages/Minloader";
 import DashboardCard from "../../components/CommonPages/DashboardCard";
 import CustomToolTip from "../../components/CommonPages/CustomToolTip";
+import useTitle from "../../components/hooks/useTitle";
 
 const IssueBook = () => {
+
+  useTitle("Issue Library Books")
+
+
   const [showForm, setShowForm] = useState(false);
   const [users, setUsers] = useState([]);
   const [books, setBooks] = useState([]);
@@ -261,21 +266,22 @@ const IssueBook = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
-      {/* HEADER */}
-      <div className="flex justify-between items-center mb-15">
-        <div>
-          <h1 className="text-2xl font-bold italic">
-            ISSUE <span className="text-blue-600">BOOK</span>
+    <div className="min-h-screen">
+    <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center lg:gap-4   ">
+                    <div>
+            <h1 className="font-[Poppins] lg:text-[25px] md:text-[20px]  text-[20px] font-bold italic">
+            ISSUE <span className="bg-linear-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+             {" "}BOOKS</span>
           </h1>
-          <p className="text-sm text-gray-500">
-            Assign books to students & teachers
+            <p className="lg:text-sm  text-xs font-semibold  text-gray-500 pb-5 lg:pb-10">
+            Assign and manage books for students and teachers with ease.
           </p>
         </div>
 
         <button
           onClick={() => setShowForm(true)}
-          className="flex  cursor-pointer items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg"
+            className="w-auto cursor-pointer mb-5 text-[10px] sm:text-[13px] lg:text-[15px] sm:w-auto self-start flex items-center gap-2 bg-blue-600 text-white lg:px-4   py-2 px-2 text-sm rounded-lg hover:bg-blue-700 transition"
         >
           <FaBook />
           Issue Book
@@ -323,7 +329,7 @@ const IssueBook = () => {
 
  
 
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-12 mb-10">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 lg:mt-10 mt-7 lg:mb-8 mb-6 ">
         <div className="flex flex-wrap gap-2">
           {/* ALL */}
           <button
@@ -370,10 +376,10 @@ const IssueBook = () => {
 
       {/* FORM */}
       {showForm && (
-        <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm  flex justify-center items-center z-1100 ">
           <div
             className="bg-white w-[92%] sm:w-[80%] md:w-[60%] lg:w-[45%]
-                          max-h-[90vh] overflow-y-auto
+                          max-h-[75vh] lg-max-h-[90vh] overflow-y-auto
                           rounded-2xl shadow-xl p-6 md:p-8"
           >
             <div className="flex justify-between items-center border-b pb-3 mb-5">
@@ -572,7 +578,7 @@ const IssueBook = () => {
       )}
 
       {/* TABLE */}
-      <div className="mt-6">
+      <div className="mt-4 lg:mt-2">
         <h3 className="text-lg font-semibold mb-4">Issued Books</h3>
 
         <div className="w-full overflow-x-auto rounded-xl shadow-md border border-gray-200 bg-white">
@@ -582,7 +588,7 @@ const IssueBook = () => {
                 <th className="p-3 text-left font-semibold">User Name</th>
                 <th className="p-3 text-left font-semibold">Email</th>
                 <th className="p-3 text-left font-semibold">Department</th>
-                <th className="p-3 text-left font-semibold">Book Title</th>
+                <th className="p-3 text-left font-semibold">Title</th>
                 <th className="p-3 text-left font-semibold">ISBN</th>
                 <th className="p-3 text-left font-semibold">Role</th>
                 <th className="p-3 text-left font-semibold">Issue Date</th>
@@ -896,6 +902,7 @@ const IssueBook = () => {
         </div>
       )}
 
+    </div>
     </div>
   );
 };

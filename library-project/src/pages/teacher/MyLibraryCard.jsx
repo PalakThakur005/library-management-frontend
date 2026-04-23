@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import api from "../../components/Api/Axios";
 import toast from "react-hot-toast";
 import { FaIdCard } from "react-icons/fa";
+import useTitle from "../../components/hooks/useTitle";
 
 const MyLibraryCard = () => {
+
+  useTitle(" My Library Card ");
+
   const [card, setCard] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -49,7 +53,7 @@ const MyLibraryCard = () => {
   const isExpired = new Date(card.expiryDate) < new Date();
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 via-purple-50 to-emerald-50 px-4 py-10">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 via-purple-50 to-emerald-50 ">
 
       {/* ✅ WELCOME SECTION */}
       <div className="max-w-4xl mx-auto mb-8 bg-white rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.20)] p-6 border border-gray-100">
@@ -70,7 +74,7 @@ const MyLibraryCard = () => {
       <div className="max-w-4xl mx-auto w-full grid md:grid-cols-2 rounded-3xl overflow-hidden shadow-2xl border border-white/40">
 
         {/* LEFT SIDE */}
-        <div className="relative bg-linear-to-br from-blue-500 to-indigo-500 text-white p-6 sm:p-8">
+        <div className="relative bg-linear-to-br from-blue-500 to-indigo-500 text-white p-4 sm:p-6">
 
           <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
 
@@ -79,43 +83,47 @@ const MyLibraryCard = () => {
             Official Digital Identity
           </p>
 
-          <div className="space-y-4 text-sm">
+         <div className="space-y-4 text-sm grid grid-cols-2 gap-6 md:justify-between md:flex md:flex-col md:space-y-4 sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0">
 
-            <div>
-              <p className="opacity-70">Card Number</p>
-              <p className="font-bold text-md">{card.cardNumber}</p>
-            </div>
+  {/* LEFT SIDE */}
+  <div className="space-y-3">
+    <div>
+      <p className="opacity-70">Card Number</p>
+      <p className="font-semibold ">{card.cardNumber}</p>
+    </div>
 
-            <div>
-              <p className="opacity-70">Name</p>
-              <p className="font-semibold capitalize">
-                {card.user?.name}
-              </p>
-            </div>
+    <div>
+      <p className="opacity-70">Role</p>
+      <span className="font-semibold capitalize">
+        {card.user?.role}
+      </span>
+    </div>
+  </div>
 
-            <div>
-              <p className="opacity-70">Email</p>
-              <p className="text-sm break-all">
-                {card.user?.email}
-              </p>
-            </div>
+  {/* RIGHT SIDE */}
+  <div className="space-y-3 ">
+   <div>
+      <p className="opacity-70">Name</p>
+      <p className="font-semibold capitalize">
+        {card.user?.name}
+      </p>
+    </div>
 
-            <div>
-              <p className="opacity-70">Role</p>
-              <span className="font-semibold capitalize">
-                {card.user?.role}
-              </span>
-            </div>
+    
+    <div>
+      <p className="opacity-70">Email</p>
+      <p className="text-sm break-all">
+        {card.user?.email}
+      </p>
+    </div>
+  </div>
 
-          </div>
+</div>
 
-          <div className="absolute bottom-6 right-6 text-xs opacity-70">
-            LIBRASYNC SYSTEM
-          </div>
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="bg-white/90 backdrop-blur-md p-6 sm:p-8 space-y-6">
+        <div className="bg-white/90 backdrop-blur-md p-4 sm:p-6 space-y-6">
 
           <h2 className="text-xl font-bold text-gray-800">
             Card Details
@@ -141,14 +149,14 @@ const MyLibraryCard = () => {
 
           {/* STATUS */}
           <div
-            className={`p-4 rounded-xl text-center font-medium
+            className={`p-4 rounded-xl text-center capitalize font-medium
               ${
                 card.user?.status === "active"
                   ? "bg-green-100 text-green-700"
                   : "bg-red-100 text-red-600"
               }`}
           >
-            Account Status: {card.user?.status}
+            Card Status: {card.user?.status}
           </div>
 
           {/* INFO */}

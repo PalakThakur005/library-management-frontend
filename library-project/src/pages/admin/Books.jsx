@@ -5,9 +5,14 @@ import api from "../../components/Api/Axios";
 import MiniLoader from "../../components/CommonPages/Minloader";
 import DashboardCard from "../../components/CommonPages/DashboardCard";
 import CustomToolTip from "../../components/CommonPages/CustomToolTip";
+import useTitle from "../../components/hooks/useTitle";
 
 
 function Books() {
+
+  useTitle("Library Books")
+
+
   const [formData, setFormData] = useState({
     title: "",
     author: "",
@@ -217,30 +222,28 @@ function Books() {
 
 
   return (
-    <div className="bg-white min-h-screen">
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* HEADER */}
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 py-6">
+    <div className=" min-h-screen">
+          <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col  sm:flex-row sm:justify-between sm:items-center lg:gap-4   ">
           <div>
-            <h1 className="font-[Poppins] text-[25px] font-bold italic">
+            <h1 className="font-[Poppins] lg:text-[25px] md:text-[20px]  text-[20px] font-bold italic">
               BOOKS <span className="bg-linear-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">MANAGEMENT</span>
             </h1>
-            <p className="text-sm font-semibold text-gray-500 pb-10">
+            <p className="lg:text-sm  text-xs font-semibold  text-gray-500 pb-5 lg:pb-10">
              Add new books to your library and manage your collection efficiently.
 </p>
           </div>
 
           <button
             onClick={handleBooks}
-            className="w-auto cursor-pointer sm:w-auto self-start flex items-center gap-2 bg-blue-600 text-white px-4 py-2 text-sm rounded-lg hover:bg-blue-700 transition"
+            className="w-auto text-[10px] sm:text-[13px]  lg:text-[15px] cursor-pointer mb-5  sm:w-auto self-start flex items-center gap-2 bg-blue-600 text-white lg:px-4 py-2 px-2 text-sm rounded-lg hover:bg-blue-700 transition"
           >
             <FaBookOpen />
             Add Books
           </button>
         </div>
 
-        <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
+<div className="grid gap-4 grid-cols-1 md:grid-cols-2  sm:grid-cols-2 lg:grid-cols-4">
 
   {/* Total Books */}
   <DashboardCard
@@ -285,7 +288,7 @@ function Books() {
 {/* form */}
 
         {showForm && (
-          <div className="fixed inset-0 bg-black/50   flex justify-center items-center z-50">
+          <div className="fixed inset-0 bg-black/40 backdrop-blur-sm   flex justify-center items-center z-1100">
             <div className="bg-white w-[95%] sm:w-105 max-h-[90vh] overflow-y-auto rounded-2xl shadow-xl p-6 animate-fadeIn">
               <div className="flex justify-between items-center mb-5 border-b pb-3">
                 <h2 className="text-xl font-semibold text-gray-800">
@@ -442,40 +445,48 @@ function Books() {
         )
         }
 
+<div className="
+  flex flex-col 
+  sm:flex-row sm:items-center sm:justify-between
+  md:flex-col md:items-start md:justify-start
+  lg:flex-row lg:items-center lg:justify-between
+  gap-4 mb-6 lg:mt-12 mt-6
+">
 
-   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 mt-12">
-
-  <div className="flex items-center gap-4">
-
-    <h1 className="font-[Poppins] text-[22px] sm:text-[26px] md:text-[28px] font-bold italic">
-      Library{" "}
+  {/* TITLE */}
+  <div className="flex items-center gap-3 sm:gap-4">
+    <h1 className="font-[Poppins] lg:text-[22px] md:text-[19px]  text-[20px] font-bold italic">
+      LIBRARY{" "}
       <span className="bg-linear-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
-        Books
+        BOOKS
       </span>
     </h1>
-
-    <div className="h-0.5 w-16 sm:w-24 md:w-32 bg-linear-to-l from-transparent via-blue-400 to-blue-600 rounded-full animate-pulse"></div>
   </div>
-  <div>
+
+  {/* SEARCH */}
+  <div className="w-full sm:w-auto">
     <input
       type="text"
       value={search}
       onChange={(e) => {
         setSearch(e.target.value);
-        setPage(1);}
-      }
-      placeholder="🔍 Search by title , isbn or author..."
-            className="w-auto sm:w-56 md:w-64 px-3 py-2 text-sm outline-none border border-gray-400 rounded-lg focus:ring-1 focus:ring-blue-100 focus:border-blue-500 self-start"
+        setPage(1);
+      }}
+      placeholder="🔍 Search by title, isbn or author..."
+                  className="w-auto sm:w-56 md:w-64 px-3 py-2 text-sm outline-none border border-gray-400 rounded-lg focus:ring-1 focus:ring-blue-100 focus:border-blue-500 self-start"
+
     />
   </div>
 
 </div>
 
+
+
         {/* table */}
-        <div className="mt-10">
+        <div className="lg:mt-8 mt-5">
           
 
-          <div className="w-full overflow-x-auto rounded-xl shadow-md border border-gray-200 bg-white">
+          <div className="  w-full  overflow-x-auto rounded-xl shadow-md border border-gray-200 bg-white">
 
             <table className="min-w-175 w-full text-sm border-collapse">
 

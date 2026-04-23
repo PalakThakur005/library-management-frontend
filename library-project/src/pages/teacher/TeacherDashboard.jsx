@@ -5,8 +5,12 @@ import {
   ResponsiveContainer, PieChart, Pie, Cell, Legend
 } from "recharts";
 import api from '../../components/Api/Axios';
+import useTitle from '../../components/hooks/useTitle';
 
 function TeacherDashboard() {
+
+    useTitle("Teacher Dashboard");
+
 
   const [user, setUser] = useState(null);
   const [mybook , setMyBook] = useState([])
@@ -25,7 +29,7 @@ function TeacherDashboard() {
       const res = await api.get("/api/auth/me");
       setUser(res.data);
     } catch (error) {
-      toast.error("Failed to fetch this user");
+      toast.error(error.response?.data?.message);
     }
   };
 
@@ -67,7 +71,7 @@ const COLORS = [
 
 
   return (
-  <div className="max-w-7xl mx-auto px-4 mt-10 sm:px-6 lg:px-8">
+  <div className="max-w-7xl mx-auto ">
 
         <div className="relative overflow-hidden rounded-2xl max-w-full shadow-[0_0_20px_rgba(0,0,0,0.25)] p-6 bg-white border border-gray-100">
           <div className="absolute -right-20 -top-20 w-72 h-72 bg-blue-100 opacity-20 rounded-full blur-3xl"></div>
@@ -101,7 +105,7 @@ const COLORS = [
         </div>
 
         
-<div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-2 gap-6 mt-6">
 
   {/* 👤 USER CARD */}
   <div className="relative group bg-white border border-blue-200 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
@@ -178,7 +182,7 @@ const COLORS = [
 
 <div className="w-full px-1 sm:px-2 mt-6 sm:mt-10">
 
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
 
     {/* 📊 BAR CHART */}
     <div className="rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition bg-white p-4 sm:p-6">

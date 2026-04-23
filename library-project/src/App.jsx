@@ -14,6 +14,7 @@ import Books from "./pages/admin/Books";
 import CardIssue from "./pages/admin/CardIssue";
 import Department from "./pages/admin/Department";
 import IssueBook from "./pages/admin/IssueBook";
+import AdminProfile from "./pages/admin/AdminProfile";
 
 
 import ForgotPassword from "./pages/auth/ForgotPassword";
@@ -53,6 +54,7 @@ function App() {
             <Route path="Books" element={<Books />} />
             <Route path="cardIssue" element={<CardIssue />} />
             <Route path="issuebook" element={<IssueBook />} />
+            <Route path="profile" element={<AdminProfile />} />
 
           </Route>
 
