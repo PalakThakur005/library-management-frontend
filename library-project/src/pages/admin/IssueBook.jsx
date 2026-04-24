@@ -802,10 +802,8 @@ const IssueBook = () => {
       {showReturnModal && selectedIssue && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
 
-          {/* MODAL */}
           <div className="bg-white w-[92%] sm:w-105 rounded-2xl shadow-2xl overflow-hidden">
 
-            {/* HEADER */}
             <div className="bg-linear-to-r from-blue-600 to-blue-500 px-6 py-4">
               <h2 className="text-white text-lg font-semibold">
                 Return Book
