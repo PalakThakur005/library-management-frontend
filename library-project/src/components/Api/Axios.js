@@ -15,18 +15,24 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// api.interceptors.response.use(
-//   (response) => response,
-//   (error) => {
-//     if (error.response && error.response.status === 401) {
-      
-//       localStorage.removeItem("token");
-//       localStorage.clear();
-//       window.location.href = "/login";
-//     }
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const status = error.response?.status;
+    const isInvalidToken = error.response?.data?.valid === false;
 
-//     return Promise.reject(error);
-//   }
-// );
+    if (status === 401 || isInvalidToken) {
+      
+      localStorage.removeItem("token");
+      localStorage.removeItem("role");
+
+      
+      window.location.href = "/login";
+    }
+
+    return Promise.reject(error);
+  })
+
+
 
 export default api;

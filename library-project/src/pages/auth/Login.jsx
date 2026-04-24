@@ -8,6 +8,7 @@ import  toast  from "react-hot-toast";
 import MiniLoader from "../../components/CommonPages/Minloader";
 import api from "../../components/Api/Axios";
 import useTitle from "../../components/hooks/useTitle";
+import { encryptData } from "../../components/utils/Crypto";
 function Login() {
   
    useTitle("Login")
@@ -67,7 +68,7 @@ const handleLogin = async (e) => {
     const res = await api.post("/api/auth/login", form);
 
     localStorage.setItem("token", res.data.token);
-    localStorage.setItem("role", res.data.user.role);
+    localStorage.setItem("role", encryptData(res.data.user.role));
 
     toast.success("Login Successfully");
 

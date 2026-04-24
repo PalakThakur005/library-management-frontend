@@ -4,13 +4,14 @@ import { Outlet, useNavigate } from "react-router-dom";
 import ConfirmationLog from "../components/CommonPages/ConfirmationLog";
 import toast from "react-hot-toast";
 import MiniLoader from "../components/CommonPages/Minloader";
+import { decryptData } from "../components/utils/Crypto";
 
 const CommonLayout = () => {
   const [showConfirmLog, setshowConfirmLog] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
 
-  const role = localStorage.getItem("role");
+  const role =decryptData(localStorage.getItem("role"));
   const navigate = useNavigate();
 
   const handleLogout = () => setshowConfirmLog(true);
