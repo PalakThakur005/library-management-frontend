@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import login from "../../assets/login.jpg";
-import logo from "../../assets/logo.png";
+import logo1 from "../../assets/logo1.png";
 import  toast  from "react-hot-toast";
 import MiniLoader from "../../components/CommonPages/Minloader";
 import api from "../../components/Api/Axios";
@@ -98,8 +98,18 @@ setPasswordError("");
 
       {/* RIGHT SIDE */}
       <div className="flex flex-1 items-center justify-center bg-white p-8">
-        <div className="w-full max-w-md text-center">
-          <img src={logo} alt="logo" className="w-20 mx-auto mb-4" />
+        <div className="w-full max-w-md  text-center">
+         <div className="w-25 h-25 mx-auto mb-4 flex items-center justify-center rounded-full bg-[#2d6c93]/10">
+  <img
+    src={logo1}
+    alt="logo"
+    className="w-12 h-12"
+    style={{
+      filter:
+        "invert(38%) sepia(18%) saturate(1200%) hue-rotate(170deg) brightness(90%) contrast(90%)",
+    }}
+  />
+</div>
 
           <h2 className="text-2xl font-semibold text-[#2d6c93]  mb-2">
             Welcome to Smart Library

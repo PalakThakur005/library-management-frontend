@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import logo from "../../assets/logo.png";
+import logo1 from "../../assets/logo1.png";
+import logo from "../../assets/logo.png"
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaSignOutAlt, FaBars, FaTimes } from "react-icons/fa";
 import { sidebarConfig } from "./SidebarConfig";
@@ -29,9 +30,9 @@ const Sidebar = ({ role, handleLogout }) => {
       {isMobile && (
   <div className="fixed top-0 left-0 w-full h-16 bg-[#2d6c93]  flex items-center justify-between px-4 z-1000 shadow-md">
 
-    {/* 🔹 LEFT (Logo + Name) */}
-    <div className="flex items-center gap-2">
-      <img src={logo} alt="logo" className="w-8 h-8 object-contain" />
+    <div className="flex items-center text-xl text-white gap-2">
+      <img src={logo1} alt="logo1" className="w-7 mx-auto  filter brightness-0 invert"
+                 />
       <h2 className="font-semibold text-white tracking-wide text-lg">
         LibraSync
       </h2>
@@ -72,7 +73,10 @@ const Sidebar = ({ role, handleLogout }) => {
           )}
 
           <div className="flex items-center gap-2 mb-8">
-            <img src={logo} alt="logo" className="w-9 h-9" />
+            <img src={logo1} alt="logo1" className="w-7 h-7 " 
+                       style={{ filter: "invert(38%) sepia(18%) saturate(1200%) hue-rotate(170deg) brightness(90%) contrast(90%)" }}
+/>
+
             <h2 className="text-sm font-bold text-[#2d6c93] ">
               LibraSync
             </h2>
