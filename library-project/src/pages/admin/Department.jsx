@@ -529,8 +529,8 @@ const Department = () => {
                     type="submit"
                     className={`flex items-center justify-center  cursor-pointer gap-2 px-4 py-2 rounded-lg text-white text-sm transition shadow
                     ${loading
-                        ? "cursor-not-allowed bg-[#3f7fa7]  opacity-80"
-                        : "bg-[#2d6c93] hover:bg-[#3d799f]"
+                        ? "cursor-not-allowed bg-[#2d6c93]  opacity-80"
+                        : "bg-[#2d6c93] hover:bg-[#1e5272] "
                       }`}
                   >
                     {loading ? (
@@ -582,7 +582,7 @@ const Department = () => {
                 <button
                   onClick={handleToggleStatus}
                   disabled={loading}
-                  className="px-4 py-2 cursor-pointer text-sm bg-[#2d6c93] hover:bg-[#3d799f] text-white rounded "
+                  className="px-4 py-2 cursor-pointer text-sm bg-[#2d6c93] hover:bg-[#1e5272]  text-white rounded "
                 >
                   {loading ? "Processing..." : "Yes"}
                 </button>

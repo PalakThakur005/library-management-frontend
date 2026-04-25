@@ -465,8 +465,8 @@ const [errors, setErrors] = useState({
                   type="submit"
                   className={`flex items-center justify-center  cursor-pointer gap-2 px-4 py-2 rounded-lg text-white text-sm transition shadow
                     ${loading
-                      ? "cursor-not-allowed bg-blue-400 opacity-80"
-                      : "bg-blue-600 hover:bg-blue-700"
+                      ? "cursor-not-allowed bg-[#2d6c93] opacity-80"
+                      : "bg-[#2d6c93] hover:bg-[#1e5272] "
                     }`}
                 >
                   {loading ?
@@ -520,7 +520,7 @@ const [errors, setErrors] = useState({
 
               <button
                 onClick={handleRemove}
-                className="px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white"
+                className="px-4 py-2 rounded-lg bg-[#2d6c93] hover:bg-[#1e5272]   text-white"
               >
                 {removing ? "Removing..." : "Remove"}
               </button>

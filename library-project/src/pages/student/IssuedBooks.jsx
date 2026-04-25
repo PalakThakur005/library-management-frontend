@@ -57,7 +57,7 @@ setTotalPages(res.data.pagination?.totalPages)
   <div>
     <h1 className="font-[Poppins] text-[25px] font-bold italic">
       MY{" "}
-      <span className="bg-linear-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+      <span className="bg-linear-to-r from-[#2d6c93] to-[#1e5272]  bg-clip-text text-transparent">
         Issued Books
       </span>
     </h1>
@@ -110,7 +110,7 @@ setTotalPages(res.data.pagination?.totalPages)
     <table className="min-w-175 w-full text-sm border-collapse">
 
       {/* HEADER */}
-      <thead className="bg-blue-600 text-white sticky top-0 z-10">
+      <thead className="bg-[#2d6c93]  text-white sticky top-0 z-10">
         <tr>
           <th className="p-3 text-left font-semibold">ISBN</th>
           <th className="p-3 text-left font-semibold">Author</th>

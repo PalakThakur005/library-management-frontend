@@ -14,10 +14,10 @@ function DashboardCard({ title, count, icon }) {
 
      
       <div className="absolute bottom-3 right-3 opacity-20">
-        <div className="w-16 h-[2px] bg-[#2d6c93] mb-1"></div>
-        <div className="w-12 h-[2px] bg-[#2d6c93] mb-1"></div>
-        <div className="w-8 h-[2px] bg-[#00304e] mb-1"></div>
-        <div className="w-5 h-[2px] bg-[#00304e]"></div>
+        <div className="w-16 h-0.5 bg-[#2d6c93] mb-1"></div>
+        <div className="w-12 h-0.5 bg-[#2d6c93] mb-1"></div>
+        <div className="w-8 h-0.5 bg-[#00304e] mb-1"></div>
+        <div className="w-5 h-0.5 bg-[#00304e]"></div>
       </div>
 
      

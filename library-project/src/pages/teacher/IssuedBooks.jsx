@@ -7,10 +7,10 @@ import useTitle from "../../components/hooks/useTitle";
 
 function Issuedbooks() {
 
-    useTitle("Issued Library Books")
+  useTitle("Issued Library Books")
 
 
-
+  // ✅ STATS
   const [stats, setStats] = useState({
     totalIssued: 0,
     activeIssued: 0,
@@ -53,11 +53,11 @@ setTotalPages(res.data.pagination?.totalPages)
     <div className="max-w-7xl mx-auto ">
 
       {/* HEADER */}
-<div className="flex flex-col  sm:flex-row sm:justify-between sm:items-center gap-4 py-6 px-5 bg-white rounded-2xl shadow-[0_0_30px_rgba(0,0,0,0.20)] hover:shadow-[0_0_2px_rgba(0,0,0,0.18)] transition-all duration-300 border border-gray-100">
+<div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 py-6 px-5 bg-white rounded-2xl shadow-[0_0_30px_rgba(0,0,0,0.20)] hover:shadow-[0_0_2px_rgba(0,0,0,0.18)] transition-all duration-300 border border-gray-100">
   <div>
     <h1 className="font-[Poppins] text-[25px] font-bold italic">
       MY{" "}
-      <span className="bg-linear-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+      <span className="bg-linear-to-r from-[#2d6c93] to-[#1e5272]  bg-clip-text text-transparent">
         Issued Books
       </span>
     </h1>
@@ -110,7 +110,7 @@ setTotalPages(res.data.pagination?.totalPages)
     <table className="min-w-175 w-full text-sm border-collapse">
 
       {/* HEADER */}
-      <thead className="bg-blue-600 text-white sticky top-0 z-10">
+      <thead className="bg-[#2d6c93]  text-white sticky top-0 z-10">
         <tr>
           <th className="p-3 text-left font-semibold">ISBN</th>
           <th className="p-3 text-left font-semibold">Author</th>
@@ -168,13 +168,13 @@ setTotalPages(res.data.pagination?.totalPages)
                 {item.book?.isbn || "N/A"}
               </td>
 
-                <td className="p-3 font-medium capitalize text-gray-900 whitespace-nowrap">
+                <td className="p-3 font-medium text-gray-900 capitalize whitespace-nowrap">
                  {item.book?.author || "Unknown author"}
               </td>
 
              
               {/* BOOK */}
-              <td className="p-3 font-medium capitalize text-gray-900 whitespace-nowrap">
+              <td className="p-3 font-medium text-gray-900 capitalize whitespace-nowrap">
                  {item.book?.title || "Unknown Book"}
               </td>
 

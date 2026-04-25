@@ -9,7 +9,7 @@ import useTitle from '../../components/hooks/useTitle';
 
 function StudentDashboard() {
 
-  useTitle("Student Dashboard");
+
 
   const [user, setUser] = useState(null);
   const [mybook , setMyBook] = useState([])
@@ -28,7 +28,7 @@ function StudentDashboard() {
       const res = await api.get("/api/auth/me");
       setUser(res.data);
     } catch (error) {
-      toast.error("Failed to fetch this user");
+      toast.error(error.response?.data?.message);
     }
   };
 
@@ -36,6 +36,9 @@ function StudentDashboard() {
     fetchUser();
     getbooks();
   }, []);
+
+      useTitle(`Dashboard-${user?.name}`);
+
 
 
 
@@ -84,7 +87,7 @@ const COLORS = [
     {/* Greeting */}
     <h2 className="text-2xl  sm:text-3xl font-bold text-gray-800">
       Hello{" "}
-      <span className="text-blue-400 capitalize">
+      <span className="text-[#2d6c93]  capitalize">
         {user.name}
       </span>{" "}
       👋

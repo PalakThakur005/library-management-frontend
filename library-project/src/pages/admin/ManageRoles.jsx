@@ -356,7 +356,7 @@ useEffect(() => {
           <div>
             <h1 className="font-[Poppins] lg:text-[25px] md:text-[20px]  text-[20px] font-bold italic">
               USER{" "}
-              <span className="bg-linear-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-[#2d6c93] to-[#3d799f] bg-clip-text text-transparent">
                 MANAGEMENT
               </span>
             </h1>
@@ -367,7 +367,7 @@ useEffect(() => {
 
           <button
             onClick={handleRoles}
-            className="w-auto  text-[10px] sm:text-[13px]  lg:text-[15px] cursor-pointer mb-5  sm:w-auto self-start flex items-center gap-2 bg-blue-600 text-white lg:px-4 py-2 px-2 text-sm rounded-lg hover:bg-blue-700 transition"
+            className="w-auto  text-[10px] sm:text-[13px]  lg:text-[15px] cursor-pointer mb-5  sm:w-auto self-start flex items-center gap-2 text-white lg:px-4 py-2 px-2 text-sm rounded-lg bg-[#2d6c93] hover:bg-[#3d799f] transition"
           >
             <FaUserPlus />
             Add Role
@@ -450,7 +450,7 @@ useEffect(() => {
                       value={formData.role}
                       onChange={handleChange}
                       name="role"
-                      className="w-full mt-1 p-2.5 border-2 border-gray-200 rounded-lg bg-blue-50 outline-none focus:border focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                      className="w-full mt-1 p-2.5 border-2 border-gray-200 rounded-lg bg-blue-50 outline-none focus:border focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-100"
                     >
                       <option value="">Select Role</option>
                       <option value="teacher">Teacher</option>
@@ -546,8 +546,8 @@ useEffect(() => {
                     type="submit"
                     className={`flex items-center justify-center  cursor-pointer gap-2 px-4 py-2 rounded-lg text-white text-sm transition shadow
                     ${loading
-                        ? "cursor-not-allowed bg-blue-400 opacity-80"
-                        : "bg-blue-600 hover:bg-blue-700"
+                        ? "cursor-not-allowed bg-[#2d6c93] opacity-80"
+                        : "bg-[#2d6c93] hover:bg-[#1e5272] "
                       }`}
                   >
                     {loading ? (
@@ -570,7 +570,7 @@ useEffect(() => {
         {/* POPUP */}
 
         {showConfirm && (
-          <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-1100">
+          <div className="fixed inset-0 bg-black/40 flex items-center backdrop-blur justify-center z-1100">
             <div className="bg-white w-[90%] sm:w-100 p-6 rounded-xl shadow-lg relative">
               <span
                 onClick={() => setShowConfirm(false)}
@@ -600,7 +600,7 @@ useEffect(() => {
                 <button
                   onClick={handleToggleStatus}
                   disabled={loading}
-                  className="px-4 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
+                  className="px-4 py-2 text-sm bg-[#2d6c93] hover:bg-[#1e5272]  text-white rounded"
                 >
                   {loading ? (
                     <>
@@ -627,7 +627,7 @@ useEffect(() => {
             <button
               onClick={() => setSelectedRole("all")}
               className={`px-4 py-2 cursor-pointer rounded transition ${selectedRole === "all"
-                ? "bg-blue-600 text-white"
+                ? "bg-[#2d6c93]  text-white"
                 : "bg-gray-200 text-black hover:bg-gray-300"
                 }`}
             >
@@ -637,7 +637,7 @@ useEffect(() => {
             <button
               onClick={() => setSelectedRole("teacher")}
               className={`px-4 py-2 cursor-pointer rounded transition ${selectedRole === "teacher"
-                ? "bg-blue-600 text-white"
+                ? "bg-[#2d6c93] text-white"
                 : "bg-gray-200 text-black hover:bg-gray-300"
                 }`}
             >
@@ -648,7 +648,7 @@ useEffect(() => {
             <button
               onClick={() => setSelectedRole("student")}
               className={`px-4 py-2 cursor-pointer rounded transition ${selectedRole === "student"
-                ? "bg-blue-600 text-white"
+                ? "bg-[#2d6c93] text-white"
                 : "bg-gray-200 text-black hover:bg-gray-300"
                 }`}
             >
@@ -672,7 +672,7 @@ useEffect(() => {
 
                    <div className="w-full max-w-full overflow-x-auto rounded-xl shadow-md border border-gray-200 bg-white">              
                     <table className="min-w-175 w-full  text-sm border-collapse">       
-                     <thead className="bg-blue-600 text-white sticky top-0 z-10">
+                     <thead className="bg-[#2d6c93] text-white sticky top-0 z-10">
                 <tr>
                   <th className="p-3 text-left font-semibold">S.No</th>
                   <th className="p-3 text-left font-semibold">Name</th>
@@ -710,9 +710,9 @@ useEffect(() => {
 
                         <button
                           onClick={() => setShowForm(true)}
-                          className="mt-5 flex items-center gap-2 bg-blue-500 text-white 
+                          className="mt-5 flex items-center gap-2 bg-[#2d6c93] text-white 
              px-5 py-2.5 rounded-lg font-medium shadow-md 
-             hover:bg-blue-700 hover:shadow-lg transition-all duration-300"
+             hover:bg-[#3d799f] hover:shadow-lg transition-all duration-300"
                         >
                           Add User
                         </button>

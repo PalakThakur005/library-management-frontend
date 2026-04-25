@@ -40,7 +40,7 @@ const ResetPassword = ({ user , onCancel, onConfirm, onCut, loading }) => {
     ${
       loading
         ? "bg-blue-400 cursor-not-allowed"
-        : "bg-blue-600 hover:bg-blue-700"
+        : "bg-[#2d6c93] hover:bg-[#3d799f]"
     } text-white`}
 >
   {loading ? (

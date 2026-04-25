@@ -227,7 +227,7 @@ function Books() {
         <div className="flex flex-col  sm:flex-row sm:justify-between sm:items-center lg:gap-4   ">
           <div>
             <h1 className="font-[Poppins] lg:text-[25px] md:text-[20px]  text-[20px] font-bold italic">
-              BOOKS <span className="bg-linear-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">MANAGEMENT</span>
+              BOOKS <span className="bg-linear-to-r from-[#2d6c93] to-[#3d799f] bg-clip-text text-transparent">MANAGEMENT</span>
             </h1>
             <p className="lg:text-sm  text-xs font-semibold  text-gray-500 pb-5 lg:pb-10">
              Add new books to your library and manage your collection efficiently.
@@ -236,7 +236,7 @@ function Books() {
 
           <button
             onClick={handleBooks}
-            className="w-auto text-[10px] sm:text-[13px]  lg:text-[15px] cursor-pointer mb-5  sm:w-auto self-start flex items-center gap-2 bg-blue-600 text-white lg:px-4 py-2 px-2 text-sm rounded-lg hover:bg-blue-700 transition"
+            className="w-auto text-[10px] sm:text-[13px]  lg:text-[15px] cursor-pointer mb-5  sm:w-auto self-start flex items-center gap-2  text-white lg:px-4 py-2 px-2 text-sm rounded-lg bg-[#2d6c93] hover:bg-[#1e5272] transition"
           >
             <FaBookOpen />
             Add Books
@@ -425,8 +425,8 @@ function Books() {
                     type="submit"
                     className={`flex  cursor-pointer items-center justify-center gap-2 px-4 py-2 rounded-lg text-white text-sm transition shadow
                   ${loading
-                        ? "cursor-not-allowed bg-blue-400 opacity-80"
-                        : "bg-blue-600 hover:bg-blue-700"
+                        ? "cursor-not-allowed bg-[#2d6c93] opacity-80"
+                        : "bg-[#2d6c93] hover:bg-[#1e5272]  "
                       }`}
                   >
                     {loading ? (
@@ -457,7 +457,7 @@ function Books() {
   <div className="flex items-center gap-3 sm:gap-4">
     <h1 className="font-[Poppins] lg:text-[22px] md:text-[19px]  text-[20px] font-bold italic">
       LIBRARY{" "}
-      <span className="bg-linear-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+      <span className="bg-linear-to-r from-[#2d6c93] to-[#3d799f] bg-clip-text text-transparent">
         BOOKS
       </span>
     </h1>
@@ -490,7 +490,7 @@ function Books() {
 
             <table className="min-w-175 w-full text-sm border-collapse">
 
-              <thead className="bg-blue-600 text-white sticky top-0 z-10">
+              <thead className="bg-[#2d6c93]  text-white sticky top-0 z-10">
                 <tr>
                   <th className="p-4 text-left font-semibold">Title</th>
                   <th className="p-4 text-left font-semibold">Author</th>
@@ -526,9 +526,9 @@ function Books() {
         {/* Button (optional) */}
         <button
           onClick={() => setShowForm(true)}
-          className="mt-6 inline-flex items-center gap-2 bg-blue-600 text-white 
+          className="mt-6 inline-flex items-center gap-2 bg-[#2d6c93] hover:bg-[#1e5272]  text-white 
                      px-6 py-2.5 rounded-lg font-medium shadow-md 
-                     hover:bg-blue-700 hover:shadow-lg transition-all duration-300"
+                      hover:shadow-lg transition-all duration-300"
         >
            Add Book
         </button>

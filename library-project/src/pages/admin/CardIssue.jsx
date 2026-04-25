@@ -203,7 +203,7 @@ const CardIssue = () => {
           <div>
             <h1 className="font-[Poppins] lg:text-[25px] md:text-[20px]  text-[20px] font-bold italic">
               ISSUE{" "}
-              <span className="bg-linear-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-[#2d6c93] to-[#3d799f] bg-clip-text text-transparent">
                 {" "}
                 LIBRARY CARD
               </span>
@@ -215,7 +215,7 @@ const CardIssue = () => {
           </div>
           <button
             onClick={() => setShowForm(true)}
-            className="w-auto text-[10px] sm:text-[13px]   lg:text-[15px] cursor-pointer mb-5  sm:w-auto self-start flex items-center gap-2 bg-blue-600 text-white lg:px-4 py-2 px-2 text-sm rounded-lg hover:bg-blue-700 transition"
+            className="w-auto text-[10px] sm:text-[13px]   lg:text-[15px] cursor-pointer mb-5  sm:w-auto self-start flex items-center gap-2  text-white lg:px-4 py-2 px-2 text-sm rounded-lg bg-[#2d6c93] hover:bg-[#3d799f] transition"
           >
             <FaIdCard />
             Issue Card
@@ -384,8 +384,8 @@ const CardIssue = () => {
                     type="submit"
                     className={`flex items-center justify-center  cursor-pointer gap-2 px-4 py-2 rounded-lg text-white text-sm transition shadow
                     ${loading
-                        ? "cursor-not-allowed bg-blue-400 opacity-80"
-                        : "bg-blue-600 hover:bg-blue-700"
+                        ? "cursor-not-allowed bg-[#2d6c93] opacity-80"
+                        : "bg-[#2d6c93] hover:bg-[#1e5272] "
                       }`}
                   >
                     {loading ? (
@@ -411,7 +411,7 @@ const CardIssue = () => {
             <button
               onClick={() => setSelectedRole("all")}
               className={`px-4  cursor-pointer py-2 rounded transition ${selectedRole === "all"
-                  ? "bg-blue-600 text-white"
+                  ? "bg-[#2d6c93]  text-white"
                   : "bg-gray-200 text-black hover:bg-gray-300"
                 }`}
             >
@@ -422,7 +422,7 @@ const CardIssue = () => {
             <button
               onClick={() => setSelectedRole("teacher")}
               className={`px-4 cursor-pointer py-2 rounded transition ${selectedRole === "teacher"
-                  ? "bg-blue-600 text-white"
+                  ? "bg-[#2d6c93]  text-white"
                   : "bg-gray-200 text-black hover:bg-gray-300"
                 }`}
             >
@@ -433,7 +433,7 @@ const CardIssue = () => {
             <button
               onClick={() => setSelectedRole("student")}
               className={`px-4  cursor-pointer py-2 rounded transition ${selectedRole === "student"
-                  ? "bg-blue-600 text-white"
+                  ? "bg-[#2d6c93] text-white"
                   : "bg-gray-200 text-black hover:bg-gray-300"
                 }`}
             >
@@ -482,9 +482,9 @@ const CardIssue = () => {
       {/* Button */}
       <button
         onClick={() => setShowForm(true)}
-        className="mt-6 inline-flex items-center gap-2 bg-blue-500 text-white 
+        className="mt-6 inline-flex items-center gap-2 bg-[#2d6c93] hover:bg-[#1e5272]  text-white 
                    px-6 py-2.5 rounded-lg font-medium shadow-md 
-                   hover:bg-blue-700 hover:shadow-lg transition-all duration-300"
+                  hover:shadow-lg transition-all duration-300"
       >
         Issue Card
       </button>

@@ -55,11 +55,10 @@ const LibraryCard = () => {
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-purple-50 to-emerald-50 ">
 
-      {/* ✅ WELCOME SECTION */}
       <div className="max-w-4xl mx-auto mb-8 bg-white rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.20)] p-6 border border-gray-100">
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
           Hello{" "}
-          <span className="text-blue-500 capitalize">
+          <span className="text-[#2d6c93] capitalize">
             {card.user?.name}
           </span>{" "}
           👋
@@ -74,7 +73,7 @@ const LibraryCard = () => {
       <div className="max-w-4xl mx-auto w-full grid md:grid-cols-2 rounded-3xl overflow-hidden shadow-2xl border border-white/40">
 
         {/* LEFT SIDE */}
-        <div className="relative bg-linear-to-br from-blue-500 to-indigo-500 text-white p-4 sm:p-6">
+        <div className="relative bg-linear-to-br from-[#2d6c93]  to-indigo-500 text-white p-4 sm:p-6">
 
           <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
 

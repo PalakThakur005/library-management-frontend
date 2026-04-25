@@ -27,7 +27,7 @@ const Sidebar = ({ role, handleLogout }) => {
   return (
     <>
       {isMobile && (
-  <div className="fixed top-0 left-0 w-full h-16 bg-[#2d6c93]  flex items-center justify-between px-4 z-[1000] shadow-md">
+  <div className="fixed top-0 left-0 w-full h-16 bg-[#2d6c93]  flex items-center justify-between px-4 z-1000 shadow-md">
 
     {/* 🔹 LEFT (Logo + Name) */}
     <div className="flex items-center gap-2">
@@ -50,7 +50,7 @@ const Sidebar = ({ role, handleLogout }) => {
       {/* 🔹 OVERLAY */}
       {isMobile && isOpen && (
         <div
-          className="fixed inset-0 bg-black/40 z-[999]"
+          className="fixed inset-0 bg-black/40 z-999"
           onClick={() => setIsOpen(false)}
         />
       )}

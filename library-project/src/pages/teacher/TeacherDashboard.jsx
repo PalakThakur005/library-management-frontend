@@ -9,7 +9,6 @@ import useTitle from '../../components/hooks/useTitle';
 
 function TeacherDashboard() {
 
-    useTitle("Teacher Dashboard");
 
 
   const [user, setUser] = useState(null);
@@ -37,6 +36,9 @@ function TeacherDashboard() {
     fetchUser();
     getbooks();
   }, []);
+
+      useTitle(`Dashboard-${user?.name}`);
+
 
 
 
@@ -85,7 +87,7 @@ const COLORS = [
     {/* Greeting */}
     <h2 className="text-2xl  sm:text-3xl font-bold text-gray-800">
       Hello{" "}
-      <span className="text-blue-400 capitalize">
+      <span className="text-[#2d6c93]  capitalize">
         {user.name}
       </span>{" "}
       👋

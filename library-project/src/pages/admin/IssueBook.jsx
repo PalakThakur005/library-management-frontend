@@ -271,7 +271,7 @@ const IssueBook = () => {
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center lg:gap-4   ">
                     <div>
             <h1 className="font-[Poppins] lg:text-[25px] md:text-[20px]  text-[20px] font-bold italic">
-            ISSUE <span className="bg-linear-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+            ISSUE <span className="bg-linear-to-r from-[#2d6c93] to-[#3d799f] bg-clip-text text-transparent">
              {" "}BOOKS</span>
           </h1>
             <p className="lg:text-sm  text-xs font-semibold  text-gray-500 pb-5 lg:pb-10">
@@ -281,7 +281,7 @@ const IssueBook = () => {
 
         <button
           onClick={() => setShowForm(true)}
-            className="w-auto cursor-pointer mb-5 text-[10px] sm:text-[13px] lg:text-[15px] sm:w-auto self-start flex items-center gap-2 bg-blue-600 text-white lg:px-4   py-2 px-2 text-sm rounded-lg hover:bg-blue-700 transition"
+            className="w-auto cursor-pointer mb-5 text-[10px] sm:text-[13px] lg:text-[15px] sm:w-auto self-start flex items-center gap-2 text-white lg:px-4   py-2 px-2 text-sm rounded-lg bg-[#2d6c93] hover:bg-[#3d799f] transition"
         >
           <FaBook />
           Issue Book
@@ -335,7 +335,7 @@ const IssueBook = () => {
           <button
             onClick={() => setSelectedRole("all")}
             className={`px-4 py-2 cursor-pointer rounded transition ${selectedRole === "all"
-              ? "bg-blue-600 text-white"
+              ? "bg-[#2d6c93]  text-white"
               : "bg-gray-200 text-black hover:bg-gray-300"
               }`}
           >
@@ -346,7 +346,7 @@ const IssueBook = () => {
           <button
             onClick={() => setSelectedRole("teacher")}
             className={`px-4 py-2 cursor-pointer rounded transition ${selectedRole === "teacher"
-              ? "bg-blue-600 text-white"
+              ? "bg-[#2d6c93] text-white"
               : "bg-gray-200 text-black hover:bg-gray-300"
               }`}
           >
@@ -357,7 +357,7 @@ const IssueBook = () => {
           <button
             onClick={() => setSelectedRole("student")}
             className={`px-4 py-2 cursor-pointer rounded transition ${selectedRole === "student"
-              ? "bg-blue-600 text-white"
+              ? "bg-[#2d6c93]  text-white"
               : "bg-gray-200 text-black hover:bg-gray-300"
               }`}
           >
@@ -555,8 +555,8 @@ const IssueBook = () => {
                   disabled={loading}
                   className={`px-4 cursor-pointer py-2 rounded-lg text-white flex items-center gap-2
                     ${loading
-                      ? "bg-blue-400 cursor-not-allowed"
-                      : "bg-blue-600 hover:bg-blue-700 active:scale-95"
+                      ? "bg-[#2d6c93] cursor-not-allowed"
+                      : "bg-[#2d6c93] hover:bg-[#1e5272]  active:scale-95"
                     }`}
                 >
                   {loading ? (
@@ -583,7 +583,7 @@ const IssueBook = () => {
 
         <div className="w-full overflow-x-auto rounded-xl shadow-md border border-gray-200 bg-white">
           <table className="min-w-200 w-full text-sm border-collapse">
-            <thead className="bg-blue-600 text-white sticky top-0 z-10">
+            <thead className="bg-[#2d6c93] text-white sticky top-0 z-10">
               <tr>
                 <th className="p-3 text-left font-semibold">User Name</th>
                 <th className="p-3 text-left font-semibold">Email</th>
@@ -626,9 +626,9 @@ const IssueBook = () => {
         </p>
          <button
         onClick={() => setShowForm(true)}
-        className="mt-6 inline-flex items-center gap-2 bg-blue-500 text-white 
+        className="mt-6 inline-flex items-center gap-2 text-white 
                    px-6 py-2.5 rounded-lg font-medium shadow-md 
-                   hover:bg-blue-700 hover:shadow-lg transition-all duration-300"
+                  bg-[#2d6c93] hover:bg-[#1e5272]  hover:shadow-lg transition-all duration-300"
       >
          Issue Book
       </button>
@@ -800,11 +800,11 @@ const IssueBook = () => {
       {/* return pop up */}
 
       {showReturnModal && selectedIssue && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/70 backdrop-blur flex items-center justify-center z-1100">
 
           <div className="bg-white w-[92%] sm:w-105 rounded-2xl shadow-2xl overflow-hidden">
 
-            <div className="bg-linear-to-r from-blue-600 to-blue-500 px-6 py-4">
+            <div className="bg-linear-to-r from-[#2d6c93] to-[#1e5272]  px-6 py-4">
               <h2 className="text-white text-lg font-semibold">
                 Return Book
               </h2>
@@ -831,13 +831,6 @@ const IssueBook = () => {
                     </p>
                   </div>
 
-
-                  {/* <div>
-            <p className="text-xs text-gray-500">User Name</p>
-            <p className="font-medium text-gray-700">
-              {selectedIssue?.user?.name}
-            </p>
-          </div> */}
                   <div>
                     <p className="text-xs text-gray-500">User email</p>
                     <p className=" text-gray-700">
@@ -880,7 +873,7 @@ const IssueBook = () => {
                   className={`px-5 py-2  cursor-pointer rounded-lg text-white shadow-md transition-all duration-200 flex items-center justify-center gap-2
                    ${loading
                       ? "bg-blue-400 cursor-not-allowed"
-                      : "bg-blue-600 hover:bg-blue-700 active:scale-95"
+                      : "bg-[#2d6c93] hover:bg-[#1e5272]  active:scale-95"
                     }`}
                 >
                   {loading ? (
