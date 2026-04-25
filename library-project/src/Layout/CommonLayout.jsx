@@ -59,7 +59,7 @@ const CommonLayout = () => {
       )}
 
       {showLoader && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm z-[1100]">
+        <div className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm z-1100">
           <MiniLoader size="w-12 h-12" />
         </div>
       )}
