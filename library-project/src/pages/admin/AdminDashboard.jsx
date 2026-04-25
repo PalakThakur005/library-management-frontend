@@ -49,7 +49,7 @@ const AdminDashboard = ({ users }) => {
 
             <h1 className="font-[Poppins] lg:text-[25px] md:text-[20px]  text-[20px] font-bold italic">
           <span className="text-black">SUPER </span>
-          <span className="bg-linear-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-[#2d6c93] to-[#3d799f]  bg-clip-text text-transparent">
             ADMIN
           </span>
           <span className="text-[#4a6a8a] font-semibold  lg:text-[25px] text-[20px]">

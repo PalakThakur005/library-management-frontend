@@ -10,7 +10,7 @@ function DashboardCard({ title, count, icon }) {
     transition-all duration-300">
 
     
-      <div className="absolute left-0 top-0 h-full w-1 bg-blue-400 rounded-l-xl"></div>
+      <div className="absolute left-0 top-0 h-full w-1 bg-[#2d6c93] rounded-l-xl"></div>
 
      
       <div className="absolute bottom-3 right-3 opacity-20">
@@ -23,8 +23,8 @@ function DashboardCard({ title, count, icon }) {
      
       <div className="flex items-center justify-center 
       w-10 h-10 rounded-lg 
-      bg-blue-700">
-        <div className="text-[#266790] text-lg">
+      bg-[#01253c]/10">
+        <div className="text-[#2d6c93] text-lg">
           {icon}
         </div>
       </div>

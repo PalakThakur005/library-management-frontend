@@ -217,7 +217,7 @@ const Department = () => {
           <div>
             <h1 className="font-[Poppins] lg:text-[25px]   text-[18px] font-bold italic">
               DEPARTMENT{" "}
-              <span className="bg-linear-to-r from-blue-600  lg:text-[25px]   text-[18px] to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-[#2d6c93]  lg:text-[25px]   text-[18px] to-[#3d799f] bg-clip-text text-transparent">
                 MANAGEMENT
               </span>
             </h1>
@@ -230,7 +230,7 @@ const Department = () => {
             onClick={() => {
               setShowForm(true);
             }}
-            className="w-auto cursor-pointer mb-5 text-[10px] sm:text-[13px] lg:text-[15px] sm:w-auto self-start flex items-center gap-2 bg-blue-600 text-white lg:px-4 py-2 px-2 text-sm rounded-lg hover:bg-blue-700 transition"
+            className="w-auto cursor-pointer mb-5 text-[10px] sm:text-[13px] lg:text-[15px] sm:w-auto self-start flex items-center gap-2 bg-[#2d6c93] hover:bg-[#3d799f] text-white lg:px-4 py-2 px-2 text-sm rounded-lg  transition"
           >
             <FaBuilding />
             Add Department
@@ -297,9 +297,9 @@ const Department = () => {
                 {/* Button */}
                 <button
                   onClick={() => setShowForm(true)}
-                  className="mt-6 inline-flex items-center gap-2 bg-blue-500 text-white 
+                  className="mt-6 inline-flex items-center gap-2 bg-[#2d6c93] text-white 
                    px-6 py-2.5 rounded-lg font-medium shadow-md 
-                   hover:bg-blue-700 hover:shadow-lg transition-all duration-300"
+                    hover:bg-[#3d799f] hover:shadow-lg transition-all duration-300"
                 >
                   Add Department
                 </button>
@@ -529,8 +529,8 @@ const Department = () => {
                     type="submit"
                     className={`flex items-center justify-center  cursor-pointer gap-2 px-4 py-2 rounded-lg text-white text-sm transition shadow
                     ${loading
-                        ? "cursor-not-allowed bg-blue-400 opacity-80"
-                        : "bg-blue-600 hover:bg-blue-700"
+                        ? "cursor-not-allowed bg-[#3f7fa7]  opacity-80"
+                        : "bg-[#2d6c93] hover:bg-[#3d799f]"
                       }`}
                   >
                     {loading ? (
@@ -582,7 +582,7 @@ const Department = () => {
                 <button
                   onClick={handleToggleStatus}
                   disabled={loading}
-                  className="px-4 py-2 cursor-pointer text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
+                  className="px-4 py-2 cursor-pointer text-sm bg-[#2d6c93] hover:bg-[#3d799f] text-white rounded "
                 >
                   {loading ? "Processing..." : "Yes"}
                 </button>

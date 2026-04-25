@@ -27,7 +27,7 @@ const Sidebar = ({ role, handleLogout }) => {
   return (
     <>
       {isMobile && (
-  <div className="fixed top-0 left-0 w-full h-16 bg-gradient-to-r from-blue-500 to-blue-500 flex items-center justify-between px-4 z-[1000] shadow-md">
+  <div className="fixed top-0 left-0 w-full h-16 bg-[#2d6c93]  flex items-center justify-between px-4 z-[1000] shadow-md">
 
     {/* 🔹 LEFT (Logo + Name) */}
     <div className="flex items-center gap-2">
@@ -56,7 +56,7 @@ const Sidebar = ({ role, handleLogout }) => {
       )}
 
       <div
-        className={`fixed top-0 left-0 h-screen z-[1000] transform transition-transform duration-300
+        className={`fixed top-0 left-0 h-screen z-1000 transform transition-transform duration-300
         ${isMobile ? (isOpen ? "translate-x-0" : "-translate-x-full") : "translate-x-0"}
       `}
       >
@@ -73,7 +73,7 @@ const Sidebar = ({ role, handleLogout }) => {
 
           <div className="flex items-center gap-2 mb-8">
             <img src={logo} alt="logo" className="w-9 h-9" />
-            <h2 className="text-sm font-bold text-blue-700">
+            <h2 className="text-sm font-bold text-[#2d6c93] ">
               LibraSync
             </h2>
           </div>
@@ -89,8 +89,8 @@ const Sidebar = ({ role, handleLogout }) => {
                 className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer text-sm transition 
                 ${
                   location.pathname === item.path
-                    ? "bg-blue-100 text-blue-600"
-                    : "text-gray-700 hover:bg-gray-100"
+                    ? "bg-blue-100 text-[#2d6c93] "
+                    : "text-gray-500 hover:bg-gray-100"
                 }`}
               >
                 <item.icon />
