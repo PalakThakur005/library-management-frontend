@@ -23,8 +23,8 @@ function DashboardCard({ title, count, icon }) {
      
       <div className="flex items-center justify-center 
       w-10 h-10 rounded-lg 
-      bg-[#01253c]/10">
-        <div className="text-blue-400  text-lg">
+      bg-blue-700">
+        <div className="text-[#266790] text-lg">
           {icon}
         </div>
       </div>
