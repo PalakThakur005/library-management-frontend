@@ -93,7 +93,7 @@ const ForgotPassword = () => {
             className="w-[90%] max-w-112.5 p-6 sm:p-10 rounded-xl bg-white shadow-md"
           >
 
-            <h1 className="text-blue-600 text-2xl mb-2 font-semibold">
+            <h1 className="text-[#2d6c93]  text-2xl mb-2 font-semibold">
               Contact Admin
             </h1>
 
@@ -116,8 +116,8 @@ const ForgotPassword = () => {
               />
 
               <label className="absolute left-4 top-4 text-gray-400 text-sm bg-blue-50 px-1 transition-all 
-              peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-500 peer-focus:bg-white 
-              peer-valid:-top-2 peer-valid:text-xs peer-valid:text-blue-500 peer-valid:bg-white">
+              peer-focus:-top-2 peer-focus:text-xs peer-focus:text-[#2d6c93] peer-focus:bg-white 
+              peer-valid:-top-2 peer-valid:text-xs peer-valid:text-[#2d6c93] peer-valid:bg-white">
                 Name*
               </label>
 
@@ -142,8 +142,8 @@ const ForgotPassword = () => {
               />
 
               <label className="absolute left-4 top-4 text-gray-400 text-sm bg-blue-50 px-1 transition-all 
-              peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-500 peer-focus:bg-white 
-              peer-valid:-top-2 peer-valid:text-xs peer-valid:text-blue-500 peer-valid:bg-white">
+              peer-focus:-top-2 peer-focus:text-xs peer-focus:text-[#2d6c93]  peer-focus:bg-white 
+              peer-valid:-top-2 peer-valid:text-xs peer-valid:text-[#2d6c93] peer-valid:bg-white">
                 Email*
               </label>
 
@@ -164,12 +164,12 @@ const ForgotPassword = () => {
                 rows="4"
                 required
                 ref={messageRef}
-                className="peer w-full px-4 py-4 pr-10 border border-gray-300 rounded-lg bg-blue-50 outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                className="peer resize-none w-full px-4 py-4 pr-10 border border-gray-300 rounded-lg bg-blue-50 outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
               />
 
               <label className="absolute left-4 top-4 text-gray-400 text-sm bg-blue-50 px-1 transition-all 
-              peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-500 peer-focus:bg-white 
-              peer-valid:-top-2 peer-valid:text-xs peer-valid:text-blue-500 peer-valid:bg-white">
+              peer-focus:-top-2 peer-focus:text-xs peer-focus:text-[#2d6c93] peer-focus:bg-white 
+              peer-valid:-top-2 peer-valid:text-xs peer-valid:text-[#2d6c93] peer-valid:bg-white">
                 Your Message*
               </label>
 
@@ -180,7 +180,7 @@ const ForgotPassword = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition shadow-md"
+              className="w-full py-3 rounded-full bg-[#2d6c93] hover:bg-[#1e5272]  text-white font-medium transition shadow-md"
             >
               {loading ? "Sending..." : "Contact Admin"}
             </button>
@@ -188,7 +188,7 @@ const ForgotPassword = () => {
             {/* LOGIN */}
             <p
               onClick={handleLogin}
-              className="mt-5 text-blue-600 text-center cursor-pointer hover:underline"
+              className="mt-5 text-[#2d6c93]  text-center cursor-pointer hover:underline"
             >
               Back to Login
             </p>

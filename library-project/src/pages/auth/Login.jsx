@@ -101,8 +101,8 @@ setPasswordError("");
         <div className="w-full max-w-md text-center">
           <img src={logo} alt="logo" className="w-20 mx-auto mb-4" />
 
-          <h2 className="text-2xl font-semibold text-blue-700 mb-2">
-            Welcome to Smart School Library
+          <h2 className="text-2xl font-semibold text-[#2d6c93]  mb-2">
+            Welcome to Smart Library
           </h2>
 
           <p className="text-gray-500  mb-6">Sign in to your account</p>
@@ -150,8 +150,8 @@ setPasswordError("");
               />
               <label
                 className="absolute left-4 top-4 text-gray-400 text-sm bg-blue-50 px-1 transition-all 
-              peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-500 peer-focus:bg-white 
-              peer-valid:-top-2 peer-valid:text-xs peer-valid:text-blue-500 peer-valid:bg-white"
+              peer-focus:-top-2 peer-focus:text-xs peer-focus:text-[#2d6c93]  peer-focus:bg-white 
+              peer-valid:-top-2 peer-valid:text-xs peer-valid:text-[#2d6c93] peer-valid:bg-white"
               >
                 Password*
               </label>
@@ -172,8 +172,8 @@ setPasswordError("");
               disabled={loading}
               className={`w-full py-3 rounded-full font-semibold transition flex items-center justify-center gap-2 text-gray-200
                    ${loading
-                  ? "bg-blue-400 cursor-not-allowed"
-                  : "bg-blue-600 hover:bg-blue-700 cursor-pointer"
+                  ? "bg-[#3a769b]  cursor-not-allowed"
+                  : "bg-[#2d6c93] hover:bg-[#1e5272] cursor-pointer"
                 }`}
             >
               {loading ? (
@@ -196,7 +196,7 @@ setPasswordError("");
                 Forgot your Password ?{" "}
                 <span
                   onClick={handleNavigate}
-                  className=" text-blue-600 cursor-pointer"
+                  className=" text-[#2d6c93]  cursor-pointer"
                 >
                   Contact Admin
                 </span>

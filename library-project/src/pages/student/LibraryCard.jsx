@@ -73,7 +73,7 @@ const LibraryCard = () => {
       <div className="max-w-4xl mx-auto w-full grid md:grid-cols-2 rounded-3xl overflow-hidden shadow-2xl border border-white/40">
 
         {/* LEFT SIDE */}
-        <div className="relative bg-linear-to-br from-[#2d6c93]  to-indigo-500 text-white p-4 sm:p-6">
+        <div className="relative bg-linear-to-br from-[#2d6c93] to-[#4a86a8] text-white p-4 sm:p-6">
 
           <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
 

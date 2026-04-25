@@ -39,7 +39,7 @@ const ResetPassword = ({ user , onCancel, onConfirm, onCut, loading }) => {
   className={`px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition
     ${
       loading
-        ? "bg-blue-400 cursor-not-allowed"
+        ? "bg-[#2d6c93] cursor-not-allowed"
         : "bg-[#2d6c93] hover:bg-[#3d799f]"
     } text-white`}
 >

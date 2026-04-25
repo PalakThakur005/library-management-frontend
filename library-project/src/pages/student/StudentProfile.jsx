@@ -165,7 +165,7 @@ const StudentProfile = () => {
               </div>
             )}
 
-            <label className="absolute bottom-2 right-5 bg-[#00304e] text-white w-9 h-9 flex items-center justify-center rounded-full cursor-pointer">
+            <label className="absolute bottom-2 right-5 bg-[#2d6c93] text-white w-9 h-9 flex items-center justify-center rounded-full cursor-pointer">
               +
               <input type="file" onChange={handleUpload} className="hidden" />
             </label>

@@ -48,15 +48,9 @@ const ConfirmationLog = ({handleCancel,handleConfirm,handleCross , loading}) => 
     transition-all duration-300 ease-in-out 
     active:scale-90 active:shadow-md"
           >
-           {/* {loading ? (
-            <>
-            <MiniLoader size= "w-5 h-5" />
-            Processing...
-            </> 
-          ): */}
-           {/* ( */}
+
             Yes
-           {/* )} */}
+  
           </button>
 
         </div>
