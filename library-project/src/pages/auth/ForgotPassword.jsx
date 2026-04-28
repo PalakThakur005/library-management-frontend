@@ -112,7 +112,7 @@ const ForgotPassword = () => {
                 onChange={handleChange}
                 required
                 ref={nameRef}
-                className="peer w-full px-4 py-4 pr-10 border border-gray-300 rounded-lg bg-blue-50 outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                className="peer w-full px-4 py-4 pr-10 border border-gray-300 rounded-lg bg-blue-50 outline-none focus:border-[#2d6c93] focus:bg-white focus:ring-2 focus:ring-blue-100"
               />
 
               <label className="absolute left-4 top-4 text-gray-400 text-sm bg-blue-50 px-1 transition-all 
@@ -138,7 +138,7 @@ const ForgotPassword = () => {
                 onChange={handleChange}
                 required
                 ref={emailRef}
-                className="peer w-full px-4 py-4 pr-10 border border-gray-300 rounded-lg bg-blue-50 outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                className="peer w-full px-4 py-4 pr-10 border border-gray-300 rounded-lg bg-blue-50 outline-none focus:border-[#2d6c93] focus:bg-white focus:ring-2 focus:ring-blue-100"
               />
 
               <label className="absolute left-4 top-4 text-gray-400 text-sm bg-blue-50 px-1 transition-all 
@@ -164,7 +164,7 @@ const ForgotPassword = () => {
                 rows="4"
                 required
                 ref={messageRef}
-                className="peer resize-none w-full px-4 py-4 pr-10 border border-gray-300 rounded-lg bg-blue-50 outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                className="peer resize-none w-full px-4 py-4 pr-10 border border-gray-300 rounded-lg bg-blue-50 outline-none focus:border-[#2d6c93] focus:bg-white focus:ring-2 focus:ring-blue-100"
               />
 
               <label className="absolute left-4 top-4 text-gray-400 text-sm bg-blue-50 px-1 transition-all 

@@ -128,19 +128,19 @@ setPasswordError("");
                 value={form.email}
                 onChange={handleChange}
                 ref={emailRef}
-                className="peer w-full px-4 py-4 pr-10 border-2 border-gray-200 rounded-lg bg-blue-50 outline-none focus:border focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                className="peer w-full px-4 py-4 pr-10 border-2 border-gray-200 rounded-lg bg-blue-50 outline-none focus:border focus:border-[#2d6c93] focus:bg-white focus:ring-2 focus:ring-blue-100"
               />
               <label
                 className="absolute left-4 top-4 text-gray-400 text-sm bg-blue-50 px-1 transition-all 
-              peer-focus:-top-2 peer-focus:text-xs peer-focus:text-blue-500 peer-focus:bg-white 
-              peer-valid:-top-2 peer-valid:text-xs peer-valid:text-blue-500 peer-valid:bg-white"
+              peer-focus:-top-2 peer-focus:text-xs peer-focus:text-[#2d6c93] peer-focus:bg-white 
+              peer-valid:-top-2 peer-valid:text-xs peer-valid:text-[#2d6c93] peer-valid:bg-white"
               >
                 Email*
               </label>
 
               <span
                 onClick={() => emailRef.current.focus()}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-md cursor-pointer peer-focus:text-blue-500"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-md cursor-pointer peer-focus:text-[#2d6c93]"
               >
                 <i className="fa-solid fa-envelope"></i>
               </span>
@@ -156,7 +156,7 @@ setPasswordError("");
                 value={form.password}
                 onChange={handleChange}
                 ref={passwordRef}
-                className="peer w-full px-4 py-4 pr-10 border-2 border-gray-200 rounded-lg bg-blue-50 outline-none focus:border focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                className="peer w-full px-4 py-4 pr-10 border-2 border-gray-200 rounded-lg bg-blue-50 outline-none focus:border focus:border-[#2d6c93] focus:bg-white focus:ring-2 focus:ring-blue-100"
               />
               <label
                 className="absolute left-4 top-4 text-gray-400 text-sm bg-blue-50 px-1 transition-all 
@@ -195,14 +195,8 @@ setPasswordError("");
                 "Login"
               )}
             </button>
-            {/* OPTIONS */}
             <div className="text-center text-sm text-gray-600">
-              {/* <label className="flex items-center gap-1">
-                <input type="checkbox" />
-                Remember me
-              </label> */}
-
-              <span className="text-gray">
+                         <span className="text-gray">
                 Forgot your Password ?{" "}
                 <span
                   onClick={handleNavigate}
