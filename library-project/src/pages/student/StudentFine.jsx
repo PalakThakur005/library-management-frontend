@@ -5,18 +5,9 @@ import DashboardCard from "../../components/CommonPages/DashboardCard";
 import { FaArrowLeft,FaBook,FaEdit,FaUndo, FaArrowRight , FaBookReader } from "react-icons/fa";
 import useTitle from "../../components/hooks/useTitle";
 
-function Issuedbooks() {
+function StudentFine() { 
 
-  useTitle("Issued Library Books")
-
-
-  // ✅ STATS
-  const [stats, setStats] = useState({
-    totalIssued: 0,
-    activeIssued: 0,
-    returned: 0,
-    overdue: 0,
-  });
+    useTitle("Student Fine Details");
 
 
   const [page, setPage] = useState(1);
@@ -27,11 +18,10 @@ function Issuedbooks() {
   const getPaginatedbooks = async (pageNumber = 1) => {
     try {
       const res = await api.get(
-        `/api/mybooks/getmyissuedbooks?page=${pageNumber}&limit=${limit}` 
+        `/api/mybooks/getmyfinebooks?page=${pageNumber}&limit=${limit}` 
       );
 
       setMyBooks(res.data.data);
-setStats(res.data?.stats);
 
 setPage(res.data.pagination?.page);
 setTotalPages(res.data.pagination?.totalPages)
@@ -45,8 +35,7 @@ setTotalPages(res.data.pagination?.totalPages)
   }, [page]);
 
 
-
-  const formatDate = (date) => {
+    const formatDate = (date) => {
     if (!date) return "N/A";
 
     const d = new Date(date);
@@ -65,72 +54,37 @@ setTotalPages(res.data.pagination?.totalPages)
 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 py-6 px-5 bg-white rounded-2xl shadow-[0_0_30px_rgba(0,0,0,0.20)] hover:shadow-[0_0_2px_rgba(0,0,0,0.18)] transition-all duration-300 border border-gray-100">
   <div>
     <h1 className="font-[Poppins] text-[25px] font-bold italic">
-      MY{" "}
+      Fine{" "}
       <span className="bg-linear-to-r from-[#2d6c93] to-[#1e5272]  bg-clip-text text-transparent">
-        Issued Books
+       Details
       </span>
     </h1>
 
     <p className="text-sm font-semibold text-gray-500 mt-1">
-      Monitor All Books Issued to You with Return Dates and Status Updates
+      Monitor fine records for overdue books and ensure timely clearance by students.
     </p>
   </div>
 
 </div>
 
-      {/* STATS  */}
-<div className="grid gap-4 my-10 grid-cols-1 md:grid-cols-2  sm:grid-cols-2 lg:grid-cols-4">
-        <DashboardCard
-          icon={<FaBook />}
-          title="Total Issued"
-          count={stats.totalIssued}
-          color="#3b82f6"
-          bgColor="bg-blue-50"
-        />
-        <DashboardCard
-          icon={<FaEdit />}
-          title="Active Issued"
-          count={stats.activeIssued}
-          color="#22c55e"
-          bgColor="bg-green-50"
-        />
-        <DashboardCard
-          icon={<FaUndo />}
-          title="Returned"
-          count={stats.returned}
-          color="#6366f1"
-          bgColor="bg-indigo-50"
-        />
-        <DashboardCard
-          icon={<FaArrowRight />}
-          title="Overdue"
-          count={stats.overdue}
-          color="#ef4444"
-          bgColor="bg-red-50"
-        />
-      </div>
+      
 
-     {/* CARDS */}
-<div className="mt-6">
-
-  {/* SCROLL CONTAINER */}
+<div className="mt-6">  
   <div className="w-full overflow-x-auto rounded-xl shadow-md border border-gray-200 bg-white">
 
     <table className="min-w-175 w-full text-sm border-collapse">
 
-      {/* HEADER */}
       <thead className="bg-[#2d6c93]  text-white sticky top-0 z-10">
         <tr>
-          <th className="p-3 text-left font-semibold">ISBN</th>
-          <th className="p-3 text-left font-semibold">Author</th>
+          <th className="p-3 text-left font-semibold">Name</th>
+          <th className="p-3 text-left font-semibold">Email</th>
           <th className="p-3 text-left font-semibold">Book</th>
-          <th className="p-3 text-left font-semibold">Issue Date</th>
           <th className="p-3 text-left font-semibold">Return Date</th>
-          <th className="p-3 text-left font-semibold">Status</th>
+        <th className="p-3 text-left font-semibold">Status</th>
+          <th className="p-3 text-left font-semibold">Fine</th>
         </tr>
       </thead>
 
-      {/* BODY */}
       <tbody className="divide-y divide-gray-200">
         
 
@@ -146,18 +100,16 @@ setTotalPages(res.data.pagination?.totalPages)
                          <FaBookReader className="text-3xl text-gray-400" />
                        </div>
          
-                 {/* Title */}
                  <h2 className="text-xl font-semibold text-gray-700">
-                   No Issued Books Found
+                   No Fined Books Found
                  </h2>
          
-                 {/* Description */}
                  <p className="text-md text-gray-400 mt-2">
-                   No books have been issued yet.
+                   No books have been fined yet.
                  </p>
          
                  <p className="text-sm text-gray-400 mt-1">
-                   Data will appear once books are issued.
+                   Data will appear once issued books are fined.
                  </p>
          
                </div>
@@ -172,33 +124,26 @@ setTotalPages(res.data.pagination?.totalPages)
             >
 
               
-              {/* ISBN */}
               <td className="p-3 text-gray-700 whitespace-nowrap">
-                {item.book?.isbn || "N/A"}
+                {item?.user?.name}
               </td>
 
-                <td className="p-3 font-medium text-gray-900 capitalize whitespace-nowrap">
-                 {item.book?.author || "Unknown author"}
+                <td className="p-3 font-medium text-gray-700  whitespace-nowrap">
+                 {item?.user?.email }
               </td>
 
              
-              {/* BOOK */}
-              <td className="p-3 font-medium text-gray-900 capitalize whitespace-nowrap">
-                 {item.book?.title || "Unknown Book"}
-              </td>
-
-
-              <td className="p-3 text-gray-800 whitespace-nowrap">
-                {formatDate(item.issueDate)}
+              <td className="p-3 font-medium text-gray-700 capitalize whitespace-nowrap">
+                 {item.book?.title }
               </td>
 
               <td className="p-3 text-gray-800 whitespace-nowrap">
                 {item.returnDate
-                  ? formatDate(item.returnDate)
+                  ? formDate(item.returnDate)
                   : "Not Returned"}
               </td>
 
-              <td className="p-3">
+                 <td className="p-3">
                 <span
                   className={`px-3 py-1 text-xs capitalize font-medium rounded-full
                   ${
@@ -212,6 +157,12 @@ setTotalPages(res.data.pagination?.totalPages)
                   {item.status}
                 </span>
               </td>
+
+              <td className="p-3 text-gray-800 whitespace-nowrap">
+                 {item?.fine }
+              </td>
+
+           
 
             </tr>
           ))
@@ -227,7 +178,6 @@ setTotalPages(res.data.pagination?.totalPages)
        {totalPages > 1 && (
   <div className="flex justify-end items-center gap-3 mt-6 pb-6">
 
-    {/* Prev Button */}
     <button
       disabled={page === 1}
       onClick={() => setPage(page - 1)}
@@ -240,12 +190,10 @@ setTotalPages(res.data.pagination?.totalPages)
       <span className="text-sm font-medium">Prev</span>
     </button>
 
-    {/* Page Info */}
     <span className="text-sm font-semibold text-gray-700 px-2">
       {page} <span className="text-gray-400">of</span> {totalPages}
     </span>
 
-    {/* Next Button */}
     <button
       disabled={page === totalPages}
       onClick={() => setPage(page + 1)}
@@ -266,4 +214,4 @@ setTotalPages(res.data.pagination?.totalPages)
   );
 }
 
-export default Issuedbooks;
+export default StudentFine;

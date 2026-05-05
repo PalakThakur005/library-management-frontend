@@ -9,6 +9,7 @@ import {
   FaIdBadge,
   FaBuilding,
   FaIdCard,
+   FaRupeeSign
 } from "react-icons/fa";
 
 export const sidebarConfig = {
@@ -19,6 +20,7 @@ export const sidebarConfig = {
     { label: "Books", icon: FaBookOpen, path: "/admin/Books" },
     {label : "Card Issue", icon :FaIdBadge , path : "/admin/cardIssue"},
      {label : " Issue Book", icon :FaBook , path : "/admin/issuebook"},
+     { label: "Fine Management", icon: FaRupeeSign, path: "/admin/fine-management" },
     {label : " Admin Profile", icon :FaUser , path : "/admin/profile"},
 
 
@@ -28,14 +30,18 @@ export const sidebarConfig = {
     { label: "Dashboard", icon: FaThLarge, path: "/teacher/dashboard" },
      { label: "Library Card", icon: FaIdCard, path: "/teacher/card" },
     { label: "Issued Book", icon: FaBookOpen, path: "/teacher/books" },
+        { label: "Library Fine ", icon: FaRupeeSign, path: "/teacher/fine" },
     { label: "Teacher Profile", icon: FaUser, path: "/teacher/profile" },
+
   ],
 
   student: [
     { label: "Dashboard", icon: FaThLarge, path: "/student/dashboard" },
     { label: "Library Card", icon: FaIdCard, path: "/student/card" },
     { label: "Issued Books", icon: FaBookOpen, path: "/student/issued" },
+            { label: "Library Fine ", icon: FaRupeeSign, path: "/student/fine" },
     { label: "Student Profile", icon: FaUser, path: "/student/profile" },
+
     
   ],
 };

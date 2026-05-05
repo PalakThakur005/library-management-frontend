@@ -46,7 +46,16 @@ setTotalPages(res.data.pagination?.totalPages)
 
 
 
+  const formatDate = (date) => {
+    if (!date) return "N/A";
 
+    const d = new Date(date);
+    const day = String(d.getDate()).padStart(2, "0");
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const year = d.getFullYear();
+
+    return `${day}-${month}-${year}`;
+  };
 
 
   return (
@@ -179,19 +188,16 @@ setTotalPages(res.data.pagination?.totalPages)
               </td>
 
 
-              {/* ISSUE DATE */}
               <td className="p-3 text-gray-800 whitespace-nowrap">
-                {new Date(item.issueDate).toLocaleDateString()}
+                {formatDate(item.issueDate)}
               </td>
 
-              {/* RETURN DATE */}
               <td className="p-3 text-gray-800 whitespace-nowrap">
                 {item.returnDate
-                  ? new Date(item.returnDate).toLocaleDateString()
+                  ? formatDate(item.returnDate)
                   : "Not Returned"}
               </td>
 
-              {/* STATUS */}
               <td className="p-3">
                 <span
                   className={`px-3 py-1 text-xs capitalize font-medium rounded-full

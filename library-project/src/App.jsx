@@ -15,6 +15,8 @@ import CardIssue from "./pages/admin/CardIssue";
 import Department from "./pages/admin/Department";
 import IssueBook from "./pages/admin/IssueBook";
 import AdminProfile from "./pages/admin/AdminProfile";
+import FineManagement from "./pages/admin/FineManagement";
+
 
 
 import ForgotPassword from "./pages/auth/ForgotPassword";
@@ -23,12 +25,14 @@ import StudentDashboard from "./pages/student/StudentDashboard";
 import StudentProfile from "./pages/student/StudentProfile";
 import IssuedBooks from "./pages/student/IssuedBooks";
 import LibraryCard from "./pages/student/LibraryCard";
+import StudentFine from "./pages/student/StudentFine";
 
 
 import TeacherDashboard from "./pages/teacher/TeacherDashboard";
 import Issuedbooks from "./pages/teacher/IssuedBooks";
 import TeacherProfile from "./pages/teacher/TeacherProfile";
 import MyLibraryCard from "./pages/teacher/MyLibraryCard";
+import TeacherFine from "./pages/teacher/TeacherFine";
 
 
 function App() {
@@ -55,6 +59,7 @@ function App() {
             <Route path="cardIssue" element={<CardIssue />} />
             <Route path="issuebook" element={<IssueBook />} />
             <Route path="profile" element={<AdminProfile />} />
+             <Route path="fine-management" element={<FineManagement />} />
 
           </Route>
 
@@ -64,6 +69,8 @@ function App() {
             <Route path="Issued" element={<IssuedBooks />} />
             <Route path="profile" element={<StudentProfile />} />
              <Route path="card" element={<LibraryCard />} />
+             <Route path="fine" element={<StudentFine />} />
+
 
           </Route>
 
@@ -73,6 +80,8 @@ function App() {
             <Route path="books" element={<Issuedbooks />} />
             <Route path="profile" element={<TeacherProfile />} />
               <Route path="card" element={<MyLibraryCard />} />
+          <Route path="fine" element={<TeacherFine />} />
+
           </Route>
 
         </Route>
