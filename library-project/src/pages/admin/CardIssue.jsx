@@ -261,7 +261,6 @@ const CardIssue = () => {
         {showForm && (
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm   flex justify-center items-center z-1100">
             <div className="bg-white w-[95%] sm:w-105 rounded-2xl shadow-xl p-6 animate-fadeIn">
-              {/* HEADER */}
               <div className="flex justify-between items-center mb-5 border-b pb-3">
                 <h2 className="text-xl font-semibold text-gray-800">
                   {isEditMode ? "Edit Library Card" : "Issue Library Card"}
@@ -286,7 +285,6 @@ const CardIssue = () => {
                 onSubmit={isEditMode ? handleUpdateSubmit : handleSubmit}
                 className="space-y-4"
               >
-                {/* Email */}
                 <div className="flex items-center gap-4">
                   <label className="w-32 text-sm text-gray-600">
                     Select Email
@@ -465,12 +463,10 @@ const CardIssue = () => {
   </div>
 </div>
 
-      {/* Title */}
       <h2 className="text-xl font-semibold text-gray-700">
         No Cards Found
       </h2>
 
-      {/* Description */}
       <p className="text-md text-gray-400 mt-2">
         You haven’t added any cards yet.
       </p>
@@ -479,7 +475,6 @@ const CardIssue = () => {
         Data will appear once it is added.
       </p>
 
-      {/* Button */}
       <button
         onClick={() => setShowForm(true)}
         className="mt-6 inline-flex items-center gap-2 bg-[#2d6c93] hover:bg-[#1e5272]  text-white 
@@ -496,104 +491,155 @@ const CardIssue = () => {
 
     cards.map((card) => (
       <div
-        key={card._id}
-        className="group relative bg-white rounded-2xl border border-gray-200 shadow-sm 
-        hover:shadow-2xl hover:-translate-y-2 hover:border-blue-300 
-        transition-all duration-300 overflow-hidden"
-      >
-        <div className="h-1.5 bg-linear-to-r bg-[#2d6c93]"></div>
+  key={card._id}
+  className="group relative bg-white overflow-hidden"
+  style={{
+    width: "272px",
+    borderRadius: "20px",
+    border: "1.5px solid #c2daea",
+    fontFamily: "'DM Sans', sans-serif",
+    transition: "transform 0.28s cubic-bezier(.22,1,.36,1), box-shadow 0.28s ease",
+  }}
+  onMouseEnter={e => {
+    e.currentTarget.style.transform = "translateY(-8px) scale(1.01)";
+    e.currentTarget.style.boxShadow = "0 24px 48px rgba(45,108,147,0.18)";
+  }}
+  onMouseLeave={e => {
+    e.currentTarget.style.transform = "";
+    e.currentTarget.style.boxShadow = "";
+  }}
+>
+  {/* Diagonal accent */}
+  <div
+    style={{
+      position: "absolute", top: 0, left: 0,
+      width: "100%", height: "72px", zIndex: 0,
+      background: card.user?.status === "inactive" ? "#7a9db5" : "#2d6c93",
+      clipPath: "polygon(0 0, 100% 0, 100% 40%, 0 100%)",
+    }}
+  />
 
-        <div className="flex items-center  gap-2 p-4">
-          <div
-            className="w-12 h-12 rounded-full bg-linear-to-br bg-[#2d6c93] 
-            text-white flex items-center justify-center font-semibold text-lg shadow-md 
-            group-hover:scale-110 transition"
-          >
-            {card.user?.name?.charAt(0).toUpperCase()}
-          </div>
-             
-          <div className="flex-1 ">
-            <h3 className="text-base capitalize font-semibold text-[#2d6c93] group-hover:text-[#245a7b] transition">
-              {card.user?.name}
-            </h3>
-            <p className="text-xs text-gray-500">{card.user?.email}</p>
-          </div>
+  {/* Header */}
+  <div style={{ position: "relative", zIndex: 1, display: "flex", alignItems: "flex-start", justifyContent: "space-between", padding: "14px 16px 0" }}>
+    <div
+      style={{
+        width: "50px", height: "50px", borderRadius: "14px",
+        background: "#fff",
+        color: card.user?.status === "inactive" ? "#7a9db5" : "#2d6c93",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: "20px",
+        border: "2px solid rgba(45,108,147,0.2)",
+        boxShadow: "0 4px 12px rgba(45,108,147,0.15)",
+        transition: "transform 0.2s",
+      }}
+      className="group-hover:transform:[rotate(-4deg)_scale(1.07)]"
+    >
+      {card.user?.name?.charAt(0).toUpperCase()}
+    </div>
 
-          <span className="text-[10px] bg-gray-100 px-2 py-1 rounded-md text-black-600 font-medium group-hover:bg-blue-50 transition">
-            {card.cardNumber}
-          </span>
-        </div>
+    <div style={{
+      fontFamily: "'Syne', sans-serif", fontSize: "9.5px", fontWeight: 700,
+      letterSpacing: "1.2px", color: "rgba(255,255,255,0.9)",
+      background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)",
+      padding: "4px 9px", borderRadius: "20px",
+    }}>
+      {card.cardNumber}
+    </div>
+  </div>
 
-        <div className="border-t"></div>
+  {/* Body */}
+  <div style={{ padding: "44px 16px 14px" }}>
+    <div style={{ fontFamily: "'Syne', sans-serif", fontSize: "16px", fontWeight: 700, color: card.user?.status === "inactive" ? "#5a7a8a" : "#1a3d52", textTransform: "capitalize", marginBottom: "2px" }}>
+      {card.user?.name}
+    </div>
+    <div style={{ fontSize: "11px", color: "#7a9db5", marginBottom: "14px" }}>
+      {card.user?.email}
+    </div>
 
-        <div className="p-2 space-y-2 text-sm">
-          <div className="flex justify-between">
-            <span className="text-gray-800">Role</span>
-            <span className="font-medium capitalize text-gray-500">
-              {card.user?.role}
-            </span>
-          </div>
+    <div style={{ height: "1px", background: "#e8f2f8", margin: "0 0 12px" }} />
 
-          <div className="flex justify-between">
-            <span className="text-gray-500">Issued</span>
-            <span className="text-gray-700">
-              {formatDate(card.issueDate)}
-            </span>
-          </div>
-
-          <div className="flex justify-between">
-            <span className="text-gray-500">Expiry</span>
-            <span className="text-gray-700 font-medium">
-              {formatDate(card.expiryDate)}
-            </span>
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-t">
-          <div className="flex items-center gap-2">
-            <span
-              className={`w-2.5 h-2.5 rounded-full ${
-                card.user?.status === "active"
-                  ? "bg-green-500 animate-pulse"
-                  : "bg-red-500"
-              }`}
-            ></span>
-
-            <span
-              className={`text-xs font-semibold ${
-                card.user?.status === "active"
-                  ? "text-green-600"
-                  : "text-red-500"
-              }`}
-            >
-              {card.user?.status === "active" ? "Active" : "Inactive"}
-            </span>
-          </div>
-           
-            <CustomToolTip text="Edit Card">
-          <button
-            onClick={() => {
-              if (card.user?.status === "inactive") return;
-              handleUpdate(card);
-            }}
-            className={`p-2 rounded-lg transition-all duration-300 shadow
-              ${
-                card.user?.status === "inactive"
-                  ? "bg-gray-100 text-gray-700 cursor-not-allowed opacity-60"
-                  : "bg-gray-100 text-[#00304e] hover:bg-[#00304e] hover:text-white hover:scale-110 cursor-pointer"
-              }`}
-          >
-           
-            <FaEdit size={13} /> 
-          </button>
-           </CustomToolTip>
-        </div>
-
-        <div
-          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 
-          transition pointer-events-none ring-1 ring-blue-200"
-        ></div>
+    <div style={{ display: "flex", flexDirection: "column", gap: "7px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <span style={{ fontSize: "11.5px", color: "#8fa8b8" }}>Role</span>
+        <span style={{
+          background: card.user?.status === "inactive" ? "#f0f4f6" : "#e5f1f8",
+          color: card.user?.status === "inactive" ? "#7a9db5" : "#2d6c93",
+          border: `1px solid ${card.user?.status === "inactive" ? "#d0e0ea" : "#b8d8ea"}`,
+          padding: "3px 10px", borderRadius: "20px",
+          fontSize: "10.5px", fontWeight: 600, textTransform: "capitalize",
+        }}>
+          {card.user?.role}
+        </span>
       </div>
+
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <span style={{ fontSize: "11.5px", color: "#8fa8b8" }}>Issued</span>
+        <span style={{ fontSize: "12px", fontWeight: 500, color: "#2d4d60" }}>{formatDate(card.issueDate)}</span>
+      </div>
+
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <span style={{ fontSize: "11.5px", color: "#8fa8b8" }}>Expiry</span>
+        <span style={{ fontSize: "12px", fontWeight: 500, color: "#2d4d60" }}>{formatDate(card.expiryDate)}</span>
+      </div>
+    </div>
+  </div>
+
+  {/* Footer */}
+  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 16px 14px", borderTop: "1px solid #e8f2f8", marginTop: "4px" }}>
+    <div style={{ display: "flex", alignItems: "center", gap: "7px" }}>
+      <span style={{
+        width: "8px", height: "8px", borderRadius: "50%", display: "inline-block",
+        background: card.user?.status === "active" ? "#2d6c93" : "#b0c9d9",
+        animation: card.user?.status === "active" ? "ripple 2s infinite" : "none",
+      }} />
+      <span style={{
+        fontSize: "11px", fontWeight: 600,
+        color: card.user?.status === "active" ? "#2d6c93" : "#8fa8b8",
+      }}>
+        {card.user?.status === "active" ? "Active" : "Inactive"}
+      </span>
+    </div>
+
+    <CustomToolTip text="Edit Card">
+      <button
+        onClick={() => {
+          if (card.user?.status === "inactive") return;
+          handleUpdate(card);
+        }}
+        style={{
+          width: "32px", height: "32px", borderRadius: "10px",
+          border: card.user?.status === "inactive" ? "1.5px solid #dde8ed" : "1.5px solid #b8d8ea",
+          background: card.user?.status === "inactive" ? "#f2f4f5" : "#f0f8fc",
+          color: card.user?.status === "inactive" ? "#b0c9d9" : "#2d6c93",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          cursor: card.user?.status === "inactive" ? "not-allowed" : "pointer",
+          opacity: card.user?.status === "inactive" ? 0.6 : 1,
+          transition: "all 0.2s cubic-bezier(.22,1,.36,1)",
+        }}
+        onMouseEnter={e => {
+          if (card.user?.status === "inactive") return;
+          e.currentTarget.style.background = "#2d6c93";
+          e.currentTarget.style.color = "#fff";
+          e.currentTarget.style.transform = "scale(1.12)";
+        }}
+        onMouseLeave={e => {
+          if (card.user?.status === "inactive") return;
+          e.currentTarget.style.background = "#f0f8fc";
+          e.currentTarget.style.color = "#2d6c93";
+          e.currentTarget.style.transform = "";
+        }}
+      >
+        <FaEdit size={13} />
+      </button>
+    </CustomToolTip>
+  </div>
+
+  <div
+    className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300"
+    style={{ borderRadius: "20px", boxShadow: `inset 0 0 0 1.5px ${card.user?.status === "inactive" ? "#b0c9d9" : "#2d6c93"}` }}
+  />
+
+</div>
     ))
   )}
 </div>

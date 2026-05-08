@@ -139,7 +139,7 @@ setTotalPages(res.data.pagination?.totalPages)
 
               <td className="p-3 text-gray-800 whitespace-nowrap">
                 {item.returnDate
-                  ? formDate(item.returnDate)
+                  ? formatDate(item.returnDate)
                   : "Not Returned"}
               </td>
 

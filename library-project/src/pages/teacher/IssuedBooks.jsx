@@ -61,7 +61,6 @@ setTotalPages(res.data.pagination?.totalPages)
   return (
     <div className="max-w-7xl mx-auto ">
 
-      {/* HEADER */}
 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 py-6 px-5 bg-white rounded-2xl shadow-[0_0_30px_rgba(0,0,0,0.20)] hover:shadow-[0_0_2px_rgba(0,0,0,0.18)] transition-all duration-300 border border-gray-100">
   <div>
     <h1 className="font-[Poppins] text-[25px] font-bold italic">
@@ -110,15 +109,12 @@ setTotalPages(res.data.pagination?.totalPages)
         />
       </div>
 
-     {/* CARDS */}
 <div className="mt-6">
 
-  {/* SCROLL CONTAINER */}
   <div className="w-full overflow-x-auto rounded-xl shadow-md border border-gray-200 bg-white">
 
     <table className="min-w-175 w-full text-sm border-collapse">
 
-      {/* HEADER */}
       <thead className="bg-[#2d6c93]  text-white sticky top-0 z-10">
         <tr>
           <th className="p-3 text-left font-semibold">ISBN</th>
@@ -130,7 +126,6 @@ setTotalPages(res.data.pagination?.totalPages)
         </tr>
       </thead>
 
-      {/* BODY */}
       <tbody className="divide-y divide-gray-200">
         
 
@@ -146,12 +141,10 @@ setTotalPages(res.data.pagination?.totalPages)
                          <FaBookReader className="text-3xl text-gray-400" />
                        </div>
          
-                 {/* Title */}
                  <h2 className="text-xl font-semibold text-gray-700">
                    No Issued Books Found
                  </h2>
          
-                 {/* Description */}
                  <p className="text-md text-gray-400 mt-2">
                    No books have been issued yet.
                  </p>
@@ -172,7 +165,6 @@ setTotalPages(res.data.pagination?.totalPages)
             >
 
               
-              {/* ISBN */}
               <td className="p-3 text-gray-700 whitespace-nowrap">
                 {item.book?.isbn || "N/A"}
               </td>
@@ -182,7 +174,6 @@ setTotalPages(res.data.pagination?.totalPages)
               </td>
 
              
-              {/* BOOK */}
               <td className="p-3 font-medium text-gray-900 capitalize whitespace-nowrap">
                  {item.book?.title || "Unknown Book"}
               </td>

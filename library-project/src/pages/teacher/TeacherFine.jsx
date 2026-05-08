@@ -13,7 +13,7 @@ function TeacherFine() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [myBooks, setMyBooks] = useState([]);
-  const limit = 4;
+  const limit = 6;
 
   const getPaginatedbooks = async (pageNumber = 1) => {
     try {
@@ -59,7 +59,7 @@ setTotalPages(res.data.pagination?.totalPages)
     </h1>
 
     <p className="text-sm font-semibold text-gray-500 mt-1">
-      Monitor fine records for overdue books and ensure timely clearance by teachers.
+      Monitor overdue book penalties, track pending payments, and ensure timely fine clearance by teachers with ease.
     </p>
   </div>
 
@@ -137,7 +137,7 @@ setTotalPages(res.data.pagination?.totalPages)
 
               <td className="p-3 text-gray-800 whitespace-nowrap">
                 {item.returnDate
-                  ? formDate(item.returnDate)
+                  ? formatDate(item.returnDate)
                   : "Not Returned"}
               </td>
 

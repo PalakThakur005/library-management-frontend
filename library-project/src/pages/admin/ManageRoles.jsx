@@ -800,8 +800,14 @@ useEffect(() => {
 
                             <CustomToolTip text="Reset Password">
                               <FaKey
-                                onClick={() => handleResetPassword(items._id)}
-                                className="text-gray-400 cursor-pointer hover:scale-110 hover:text-gray-600 transition"
+                              onClick={() => {
+                                  if (items.status === "inactive") return;
+                                  handleResetPassword(items._id)
+                                }}
+                              className={`transition ${items.status === "inactive"
+                                  ? "text-gray-300 cursor-not-allowed"
+                                  : "text-gray-500 cursor-pointer hover:scale-110 hover:text-gray-600"
+                                  }`}
                               />
                             </CustomToolTip>
 
@@ -832,7 +838,6 @@ useEffect(() => {
         {totalPages > 1 && (
           <div className="flex justify-end items-center gap-3 mt-6 pb-6">
 
-            {/* Prev Button */}
             <button
               disabled={page === 1}
               onClick={() => setPage(page - 1)}
@@ -845,12 +850,10 @@ useEffect(() => {
               <span className="text-sm font-medium">Prev</span>
             </button>
 
-            {/* Page Info */}
             <span className="text-sm font-semibold text-gray-700 px-2">
               {page} <span className="text-gray-400">of</span> {totalPages}
             </span>
 
-            {/* Next Button */}
             <button
               disabled={page === totalPages}
               onClick={() => setPage(page + 1)}
